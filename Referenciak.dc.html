@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:'Titillium Web',system-ui,sans-serif;color:#1b1d1a;background:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:#3a6e2c;text-decoration:none}
+  a:hover{color:#4c8c3a}
+  h1,h2,h3,h4{font-family:'Titillium Web',system-ui,sans-serif;margin:0;text-transform:uppercase}
+  ::selection{background:#cfe4c2}
+  @keyframes floatUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+</style>
+</helmet>
+
+<div style="min-height:100vh">
+
+  <header style="position:sticky;top:0;z-index:60;background:rgba(255,255,255,.72);backdrop-filter:blur(14px);border-bottom:1px solid rgba(231,232,227,.6)">
+    <div style="max-width:1300px;margin:0 auto;padding:0 40px">
+      <div style="display:flex;justify-content:flex-end;align-items:center;gap:20px;padding-top:10px">
+        <a href="https://www.facebook.com/epronex" target="_blank" rel="noopener" aria-label="Facebook" style="color:#1b1d1a" style-hover="color:#4c8c3a"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M14 8.5V6.8c0-.8.2-1.2 1.4-1.2H17V2.5h-2.6C11.5 2.5 10.4 4 10.4 6.5v2H8.5v3.1h1.9V21.5H14V11.6h2.3l.4-3.1H14z"/></svg></a>
+        <a href="https://www.linkedin.com/company/epronex" target="_blank" rel="noopener" aria-label="LinkedIn" style="color:#1b1d1a" style-hover="color:#4c8c3a"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21H18.6v-5.4c0-1.3-.02-2.96-1.8-2.96-1.8 0-2.08 1.4-2.08 2.86V21H10z"/></svg></a>
+        <a href="https://www.instagram.com/epronex" target="_blank" rel="noopener" aria-label="Instagram" style="color:#1b1d1a" style-hover="color:#4c8c3a"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.86.07 1.17.05 1.97.24 2.67.51.72.28 1.33.66 1.94 1.27.61.61.99 1.22 1.27 1.94.27.7.46 1.5.51 2.67.06 1.26.07 1.66.07 4.86s0 3.6-.07 4.86c-.05 1.17-.24 1.97-.51 2.67a5.4 5.4 0 0 1-1.27 1.94 5.4 5.4 0 0 1-1.94 1.27c-.7.27-1.5.46-2.67.51-1.26.06-1.66.07-4.86.07s-3.6 0-4.86-.07c-1.17-.05-1.97-.24-2.67-.51a5.4 5.4 0 0 1-1.94-1.27 5.4 5.4 0 0 1-1.27-1.94c-.27-.7-.46-1.5-.51-2.67C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.86c.05-1.17.24-1.97.51-2.67.28-.72.66-1.33 1.27-1.94A5.4 5.4 0 0 1 5.99 1.26c.7-.27 1.5-.46 2.67-.51C9.92 2.2 10.32 2.2 12 2.2zm0 1.8c-3.15 0-3.52.01-4.76.07-.9.04-1.38.19-1.7.32-.43.16-.73.36-1.06.68-.32.33-.52.63-.68 1.06-.13.32-.28.8-.32 1.7C3.4 8.48 3.4 8.85 3.4 12s.01 3.52.07 4.76c.04.9.19 1.38.32 1.7.16.43.36.73.68 1.06.33.32.63.52 1.06.68.32.13.8.28 1.7.32 1.24.06 1.61.07 4.76.07s3.52-.01 4.76-.07c.9-.04 1.38-.19 1.7-.32.43-.16.73-.36 1.06-.68.32-.33.52-.63.68-1.06.13-.32.28-.8.32-1.7.06-1.24.07-1.61.07-4.76s-.01-3.52-.07-4.76c-.04-.9-.19-1.38-.32-1.7a2.85 2.85 0 0 0-.68-1.06 2.85 2.85 0 0 0-1.06-.68c-.32-.13-.8-.28-1.7-.32C15.52 4.01 15.15 4 12 4zm0 3.06a4.94 4.94 0 1 1 0 9.88 4.94 4.94 0 0 1 0-9.88zm0 1.8a3.14 3.14 0 1 0 0 6.28 3.14 3.14 0 0 0 0-6.28zm6.28-.36a1.15 1.15 0 1 1-2.3 0 1.15 1.15 0 0 1 2.3 0z"/></svg></a>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;height:78px">
+        <a href="index.html" style="display:flex;align-items:center">
+          <img src="assets/epronex-logo.png" alt="Epronex — Az építő erő" style="height:58px;width:auto;display:block">
+        </a>
+        <nav style="display:flex;align-items:center;gap:40px;font-family:'Titillium Web';font-weight:700;font-size:17px;letter-spacing:1px">
+          <a href="index.html#epronex" style="color:#141414" style-hover="color:#4c8c3a">EPRONEX</a>
+          <a href="Referenciak.dc.html" style="color:#4c8c3a">REFERENCIÁK</a>
+          <a href="index.html#tevekenyseg" style="color:#141414" style-hover="color:#4c8c3a">TEVÉKENYSÉGEK</a>
+          <a href="index.html#karrier" style="color:#141414" style-hover="color:#4c8c3a">KARRIER</a>
+          <a href="index.html#kapcsolat" style="color:#141414" style-hover="color:#4c8c3a">KAPCSOLAT</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div style="position:relative;height:420px;overflow:hidden;background:#1b1d1a">
+    <img src="assets/ref-richter.jpg" alt="Epronex referenciák" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+    <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,17,14,.92) 0%,rgba(15,17,14,.6) 52%,rgba(15,17,14,.28) 100%);pointer-events:none"></div>
+    <div style="position:absolute;inset:0">
+      <div style="max-width:1240px;margin:0 auto;padding:0 32px;height:100%;display:flex;flex-direction:column;justify-content:center">
+        <div style="max-width:720px;animation:floatUp .9s cubic-bezier(.2,.7,.2,1) both">
+          <div style="font-family:'Titillium Web';font-weight:700;font-size:13px;letter-spacing:2.5px;color:#8bc46f;margin-bottom:16px">REFERENCIÁK</div>
+          <h1 style="color:#fff;font-size:52px;font-weight:700;line-height:1.02;letter-spacing:-1.2px">Projektek, amelyek<br>önmagukért beszélnek</h1>
+          <p style="color:#d6d9d0;font-size:17px;line-height:1.65;margin:22px 0 0;max-width:560px;font-family:'Titillium Web';font-weight:500">Irodai fit-outtól az ipari csarnokokig — díjnyertes és nagyvállalati kivitelezéseink egy helyen.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div style="position:sticky;top:118px;z-index:40;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border-bottom:1px solid #e7e8e3">
+    <div style="max-width:1240px;margin:0 auto;padding:18px 32px;display:flex;flex-wrap:wrap;gap:10px">
+      <sc-for list="{{ filters }}" as="f" hint-placeholder-count="5">
+        <button onClick="{{ f.onClick }}" style="{{ f.style }}">{{ f.label }}</button>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- GRID -->
+  <div style="max-width:1240px;margin:0 auto;padding:44px 32px 20px">
+    <div style="color:#71766e;font-size:14px;margin-bottom:24px">{{ countLabel }}</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px">
+      <sc-for list="{{ projects }}" as="p" hint-placeholder-count="9">
+        <div data-reveal data-cat="{{ p.cat }}" style="position:relative;height:270px;border-radius:9px;overflow:hidden;background:#000;transition:box-shadow .35s,transform .35s" style-hover="box-shadow:0 20px 44px rgba(27,29,26,.22);transform:translateY(-5px)">
+          <img src="{{ p.img }}" alt="{{ p.title }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s,opacity .4s" style-hover="transform:scale(1.06);opacity:.85">
+          <sc-if value="{{ p.badge }}" hint-placeholder-val="{{ true }}">
+            <span style="position:absolute;top:14px;left:14px;font-family:'Titillium Web';font-weight:700;font-size:10px;letter-spacing:.8px;color:#1b1d1a;background:#8bc46f;padding:5px 11px;border-radius:4px;z-index:2">{{ p.badge }}</span>
+          </sc-if>
+          <div style="position:absolute;left:0;right:0;bottom:0;padding:52px 22px 20px;background:linear-gradient(transparent,rgba(15,17,14,.94));pointer-events:none">
+            <span style="font-family:'Titillium Web';font-weight:700;font-size:10.5px;letter-spacing:1.2px;color:#8bc46f">{{ p.catLabel }}</span>
+            <div style="color:#fff;font-family:'Titillium Web';font-weight:700;font-size:20px;margin-top:5px">{{ p.title }}</div>
+            <div style="color:#c9ccc4;font-size:12.5px;margin-top:3px">{{ p.meta }}</div>
+          </div>
+          <sc-if value="{{ p.href }}" hint-placeholder-val="{{ true }}">
+            <a href="{{ p.href }}" aria-label="{{ p.title }}" style="position:absolute;inset:0;z-index:3;display:flex;align-items:flex-start;justify-content:flex-end;padding:14px">
+              <span style="display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.92);color:#1b1d1a;font-family:'Titillium Web';font-weight:700;font-size:10.5px;letter-spacing:1px;padding:7px 12px;border-radius:40px">MEGTEKINTÉS
+                <svg width="14" height="9" viewBox="0 0 22 14" fill="none"><path d="M1 7h19M15 2l5 5-5 5" stroke="#1b1d1a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- CTA STRIP -->
+  <div style="max-width:1240px;margin:60px auto 80px;padding:0 32px">
+    <div style="background:#1b1d1a;border-radius:10px;padding:52px 56px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap">
+      <div>
+        <h2 style="color:#fff;font-size:30px;font-weight:600;letter-spacing:-.3px">Van egy projektje?</h2>
+        <p style="color:#9aa093;font-size:16px;line-height:1.6;margin:12px 0 0;max-width:460px">Egyeztessünk a következő kivitelezésről — az előkészítéstől az átadásig egy kézben.</p>
+      </div>
+      <a href="index.html#kapcsolat" style="background:#4c8c3a;color:#fff;font-family:'Titillium Web';font-weight:700;font-size:14px;letter-spacing:1px;padding:16px 34px;border-radius:5px;display:inline-flex;align-items:center;gap:10px;transition:background .25s" style-hover="background:#5aa843;color:#fff">KAPCSOLATFELVÉTEL
+        <svg width="20" height="12" viewBox="0 0 22 14" fill="none"><path d="M1 7h19M15 2l5 5-5 5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <footer style="background:#1b1d1a;color:#c9ccc4">
+    <div style="max-width:1240px;margin:0 auto;padding:60px 32px 32px;display:grid;grid-template-columns:1.5fr 1fr 1.1fr;gap:44px">
+      <div>
+        <div style="background:#fff;border-radius:10px;padding:16px 20px;display:inline-block;margin-bottom:20px"><img src="assets/epronex-logo.png" alt="Epronex — Az építő erő" style="height:56px;width:auto;display:block"></div>
+        <p style="margin:0;font-size:14.5px;line-height:1.7;max-width:340px;color:#9aa093">Generálkivitelezés és fit-out prémium minőségben — retail, iroda és ipari projektek megbízható partnereként, 2015 óta.</p>
+      </div>
+      <div>
+        <div style="font-family:'Titillium Web';font-weight:700;font-size:13px;letter-spacing:1.5px;color:#fff;margin-bottom:18px">OLDALAK</div>
+        <div style="display:flex;flex-direction:column;gap:11px;font-size:14.5px">
+          <a href="index.html#epronex" style="color:#c9ccc4" style-hover="color:#8bc46f">A cégről</a>
+          <a href="index.html#tevekenyseg" style="color:#c9ccc4" style-hover="color:#8bc46f">Tevékenységek</a>
+          <a href="Referenciak.dc.html" style="color:#c9ccc4" style-hover="color:#8bc46f">Referenciák</a>
+          <a href="index.html#karrier" style="color:#c9ccc4" style-hover="color:#8bc46f">Karrier</a>
+          <a href="index.html#kapcsolat" style="color:#c9ccc4" style-hover="color:#8bc46f">Kapcsolat</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:'Titillium Web';font-weight:700;font-size:13px;letter-spacing:1.5px;color:#fff;margin-bottom:18px">EPRONEX ÉPÍTŐ ZRT.</div>
+        <div style="display:flex;flex-direction:column;gap:9px;font-size:14.5px;color:#9aa093">
+          <span>2040 Budaörs, Kamaraerdei út 2.</span>
+          <span>Adószám: 25301360-2-13</span>
+          <span>Cégjegyzékszám: 13 10 041514</span>
+          <a href="tel:+3623814819" style="color:#c9ccc4" style-hover="color:#8bc46f">Telefon: +36 23 814 819</a>
+          <a href="mailto:info@epronex.hu" style="color:#c9ccc4" style-hover="color:#8bc46f">info@epronex.hu</a>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid #33362f"><div style="max-width:1240px;margin:0 auto;padding:20px 32px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:#7b8073"><span>© 2026 Epronex Építő Zrt. — Az építő erő</span><a href="#" style="color:#7b8073" style-hover="color:#8bc46f">Adatkezelési tájékoztató</a></div></div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { active: 'all' };
+
+  cats() {
+    return [
+      { id: 'all', label: 'ÖSSZES' },
+      { id: 'iroda', label: 'IRODA' },
+      { id: 'retail', label: 'RETAIL' },
+      { id: 'ipari', label: 'IPARI' },
+      { id: 'egeszsegugy', label: 'EGÉSZSÉGÜGY' }
+    ];
+  }
+
+  allProjects() {
+    return [
+      { id:'richter', title:'Richter Központ', cat:'iroda', catLabel:'GENERÁLKIVITELEZÉS', meta:'Budapest · 17 400 m²', img:'assets/ref-richter.jpg', badge:'AZ ÉV IRODÁJA 2024' },
+      { id:'benu', title:'BENU Magyarország', cat:'iroda', catLabel:'IRODAI FIT-OUT', meta:'Budapest · Haller Gardens · 2021', img:'assets/ref-benu.jpg', href:'Referencia-BENU.dc.html' },
+      { id:'computacenter', title:'Computacenter', cat:'iroda', catLabel:'IRODAI FIT-OUT', meta:'Budapest · irodaterület', img:'assets/ref-computacenter.jpg' },
+      { id:'margit', title:'Margit Palace', cat:'iroda', catLabel:'IRODAHÁZ · KÖZÖSSÉGI TÉR', meta:'Budapest · Henger utca · 2017', img:'assets/ref-margit.jpg' },
+      { id:'hungaria', title:'Hungária Center', cat:'iroda', catLabel:'IRODAHÁZ', meta:'Budapest', img:'assets/ref-hungaria.jpg' },
+      { id:'otp', title:'OTP Csúcs', cat:'iroda', catLabel:'KÖZÖSSÉGI TÉR', meta:'Budapest', img:'assets/ref-otpcsucs.jpg' },
+      { id:'trivium', title:'Trivium Packaging BSC', cat:'iroda', catLabel:'IRODAI FIT-OUT', meta:'Budapest', img:'assets/ref-trivium.jpg' },
+      { id:'newyorker', title:'New Yorker', cat:'retail', catLabel:'RETAIL · GENERÁLKIVITELEZÉS', meta:'Országosan · 2015-től', img:'assets/ref-newyorker.jpg' },
+      { id:'kfc', title:'KFC Budaörs', cat:'retail', catLabel:'RETAIL · VENDÉGLÁTÁS', meta:'Budaörs', img:'assets/ref-kfc.jpg' },
+      { id:'hm', title:'H&M', cat:'retail', catLabel:'RETAIL', meta:'Több helyszín', img:'assets/ref-hm.jpg' },
+      { id:'pepco', title:'PEPCO', cat:'retail', catLabel:'RETAIL', meta:'Több helyszín', img:'assets/ref-pepco.jpg' },
+      { id:'icentre', title:'iCentre', cat:'retail', catLabel:'RETAIL · APPLE PREMIUM RESELLER', meta:'Több helyszín', img:'assets/ref-icentre.jpg' },
+      { id:'bav', title:'BÁV Art', cat:'retail', catLabel:'RETAIL · AUKCIÓSHÁZ', meta:'Budapest · Szent István krt.', img:'assets/ref-bav.jpg' },
+      { id:'gubacsi', title:'Gubacsi Logisztikai Park', cat:'ipari', catLabel:'IPAR · LOGISZTIKA', meta:'Budapest · 6 790 m²', img:'assets/ref-gubacsi.jpg' },
+      { id:'egis', title:'EGIS', cat:'ipari', catLabel:'IPARI · GÉPÉSZET', meta:'Budapest', img:'assets/ref-egis.jpg' },
+      { id:'medicontur', title:'Medicontur', cat:'ipari', catLabel:'IPARI · TECHNOLÓGIA', meta:'Zsámbék', img:'assets/ref-medicontur.jpg' },
+      { id:'medicover', title:'Medicover Eiffel Klinika', cat:'egeszsegugy', catLabel:'EGÉSZSÉGÜGY', meta:'Budapest · Teréz krt. · 2 400 m²', img:'assets/ref-medicover.jpg' }
+    ];
+  }
+
+  renderVals() {
+    const active = this.state.active;
+    const filters = this.cats().map(cat => {
+      const on = cat.id === active;
+      return {
+        label: cat.label,
+        onClick: () => this.setState({ active: cat.id }),
+        style: "font-family:'Titillium Web',sans-serif;font-weight:700;font-size:13px;letter-spacing:.6px;padding:11px 22px;border-radius:100px;cursor:pointer;transition:all .2s;border:1px solid " +
+          (on ? '#4c8c3a' : '#d8dad3') + ';background:' + (on ? '#4c8c3a' : '#fff') + ';color:' + (on ? '#fff' : '#3a3d38')
+      };
+    });
+
+    const list = this.allProjects().filter(p => active === 'all' || p.cat === active);
+    const projects = list.map(p => ({
+      cat: p.cat, title: p.title, catLabel: p.catLabel, meta: p.meta, img: p.img,
+      badge: p.badge || '', href: p.href || ''
+    }));
+
+    const n = list.length;
+    return {
+      filters, projects,
+      countLabel: n + ' projekt' + (active === 'all' ? '' : ' ebben a kategóriában')
+    };
+  }
+
+  componentDidMount() {
+    this._io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='none'; this._io.unobserve(e.target); } });
+    }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
+    this._prep();
+    setTimeout(() => {
+      document.querySelectorAll('[data-reveal]').forEach(el => { if (getComputedStyle(el).opacity === '0') { el.style.opacity='1'; el.style.transform='none'; } });
+    }, 1600);
+  }
+  componentDidUpdate() { this._prep(); }
+  _prep() {
+    document.querySelectorAll('[data-reveal]').forEach(el => {
+      if (!el._revInit) {
+        el._revInit = true;
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(26px)';
+        el.style.transition = 'opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1)';
+        this._io.observe(el);
+      }
+    });
+  }
+  componentWillUnmount() { if (this._io) this._io.disconnect(); }
+}
+</script>
+</body>
+</html>

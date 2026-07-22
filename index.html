@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:'Titillium Web',system-ui,sans-serif;color:#1b1d1a;background:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:#3a6e2c;text-decoration:none}
+  a:hover{color:#4c8c3a}
+  h1,h2,h3,h4{font-family:'Titillium Web',system-ui,sans-serif;margin:0;text-transform:uppercase}
+  input,textarea{font-family:'Titillium Web',sans-serif}
+  ::selection{background:#cfe4c2}
+  section[id]{scroll-margin-top:124px}
+  @keyframes floatUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @keyframes scrollcue{0%{transform:translateY(0);opacity:0}30%{opacity:1}100%{transform:translateY(16px);opacity:0}}
+</style>
+</helmet>
+
+<div style="min-height:100vh">
+
+  <header style="position:sticky;top:0;z-index:60;background:rgba(255,255,255,.72);backdrop-filter:blur(14px);border-bottom:1px solid rgba(231,232,227,.6)">
+    <div style="max-width:1300px;margin:0 auto;padding:0 40px">
+      <div style="display:flex;justify-content:flex-end;align-items:center;gap:20px;padding-top:10px">
+        <a href="https://www.facebook.com/epronex" target="_blank" rel="noopener" aria-label="Facebook" style="color:#1b1d1a" style-hover="color:#4c8c3a"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M14 8.5V6.8c0-.8.2-1.2 1.4-1.2H17V2.5h-2.6C11.5 2.5 10.4 4 10.4 6.5v2H8.5v3.1h1.9V21.5H14V11.6h2.3l.4-3.1H14z"/></svg></a>
+        <a href="https://www.linkedin.com/company/epronex" target="_blank" rel="noopener" aria-label="LinkedIn" style="color:#1b1d1a" style-hover="color:#4c8c3a"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21H18.6v-5.4c0-1.3-.02-2.96-1.8-2.96-1.8 0-2.08 1.4-2.08 2.86V21H10z"/></svg></a>
+        <a href="https://www.instagram.com/epronex" target="_blank" rel="noopener" aria-label="Instagram" style="color:#1b1d1a" style-hover="color:#4c8c3a"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.86.07 1.17.05 1.97.24 2.67.51.72.28 1.33.66 1.94 1.27.61.61.99 1.22 1.27 1.94.27.7.46 1.5.51 2.67.06 1.26.07 1.66.07 4.86s0 3.6-.07 4.86c-.05 1.17-.24 1.97-.51 2.67a5.4 5.4 0 0 1-1.27 1.94 5.4 5.4 0 0 1-1.94 1.27c-.7.27-1.5.46-2.67.51-1.26.06-1.66.07-4.86.07s-3.6 0-4.86-.07c-1.17-.05-1.97-.24-2.67-.51a5.4 5.4 0 0 1-1.94-1.27 5.4 5.4 0 0 1-1.27-1.94c-.27-.7-.46-1.5-.51-2.67C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.86c.05-1.17.24-1.97.51-2.67.28-.72.66-1.33 1.27-1.94A5.4 5.4 0 0 1 5.99 1.26c.7-.27 1.5-.46 2.67-.51C9.92 2.2 10.32 2.2 12 2.2zm0 1.8c-3.15 0-3.52.01-4.76.07-.9.04-1.38.19-1.7.32-.43.16-.73.36-1.06.68-.32.33-.52.63-.68 1.06-.13.32-.28.8-.32 1.7C3.4 8.48 3.4 8.85 3.4 12s.01 3.52.07 4.76c.04.9.19 1.38.32 1.7.16.43.36.73.68 1.06.33.32.63.52 1.06.68.32.13.8.28 1.7.32 1.24.06 1.61.07 4.76.07s3.52-.01 4.76-.07c.9-.04 1.38-.19 1.7-.32.43-.16.73-.36 1.06-.68.32-.33.52-.63.68-1.06.13-.32.28-.8.32-1.7.06-1.24.07-1.61.07-4.76s-.01-3.52-.07-4.76c-.04-.9-.19-1.38-.32-1.7a2.85 2.85 0 0 0-.68-1.06 2.85 2.85 0 0 0-1.06-.68c-.32-.13-.8-.28-1.7-.32C15.52 4.01 15.15 4 12 4zm0 3.06a4.94 4.94 0 1 1 0 9.88 4.94 4.94 0 0 1 0-9.88zm0 1.8a3.14 3.14 0 1 0 0 6.28 3.14 3.14 0 0 0 0-6.28zm6.28-.36a1.15 1.15 0 1 1-2.3 0 1.15 1.15 0 0 1 2.3 0z"/></svg></a>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;height:78px">
+        <a href="index.html" style="display:flex;align-items:center">
+          <img src="assets/epronex-logo.png" alt="Epronex — Az építő erő" style="height:58px;width:auto;display:block">
+        </a>
+        <nav style="display:flex;align-items:center;gap:40px;font-family:'Titillium Web';font-weight:700;font-size:17px;letter-spacing:1px">
+          <a href="#epronex" style="color:#141414" style-hover="color:#4c8c3a">EPRONEX</a>
+          <a href="Referenciak.dc.html" style="color:#141414" style-hover="color:#4c8c3a">REFERENCIÁK</a>
+          <a href="#tevekenyseg" style="color:#141414" style-hover="color:#4c8c3a">TEVÉKENYSÉGEK</a>
+          <a href="#karrier" style="color:#141414" style-hover="color:#4c8c3a">KARRIER</a>
+          <a href="#kapcsolat" style="color:#141414" style-hover="color:#4c8c3a">KAPCSOLAT</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div style="position:relative;height:720px;overflow:hidden;background:#1b1d1a">
+    <div ref="{{ heroRef }}" style="position:absolute;inset:-90px 0;will-change:transform">
+      <img src="assets/ref-richter.jpg" alt="Richter Gedeon Irodaépület" style="width:100%;height:100%;object-fit:cover">
+    </div>
+    <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,17,14,.9) 0%,rgba(15,17,14,.62) 46%,rgba(15,17,14,.24) 100%);pointer-events:none"></div>
+    <div style="position:absolute;inset:0;pointer-events:none">
+      <div style="max-width:1240px;margin:0 auto;padding:0 32px;height:100%;display:flex;flex-direction:column;justify-content:center">
+        <div style="max-width:760px;pointer-events:auto;animation:floatUp .9s cubic-bezier(.2,.7,.2,1) both">
+          <div style="display:inline-flex;align-items:center;gap:10px;font-family:'Titillium Web';font-weight:600;font-size:12.5px;letter-spacing:2.5px;color:#8bc46f;margin-bottom:24px;border:1px solid rgba(139,196,111,.4);border-radius:40px;padding:8px 18px">MAGYAR TULAJDONÚ GENERÁLKIVITELEZŐ</div>
+          <h1 style="color:#fff;font-size:62px;font-weight:700;line-height:1.02;letter-spacing:-1.6px">Generálkivitelezés<br>és fit-out<br>prémium minőségben</h1>
+          <p style="color:#d6d9d0;font-size:18px;line-height:1.6;margin:26px 0 16px;max-width:560px;font-family:'Titillium Web';font-weight:500;letter-spacing:.3px">Retail · Iroda · Ipar — az előkészítéstől a kulcsrakész átadásig, egy kézben.</p>
+          <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:20px">
+            <a href="#referenciak" style="background:#4c8c3a;color:#fff;font-family:'Titillium Web';font-weight:700;font-size:14px;letter-spacing:1px;padding:16px 32px;border-radius:5px;display:inline-flex;align-items:center;gap:10px;transition:background .25s" style-hover="background:#5aa843;color:#fff">REFERENCIÁK
+              <svg width="20" height="12" viewBox="0 0 22 14" fill="none"><path d="M1 7h19M15 2l5 5-5 5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="#epronex" style="background:transparent;color:#fff;border:1px solid rgba(255,255,255,.5);font-family:'Titillium Web';font-weight:700;font-size:14px;letter-spacing:1px;padding:16px 32px;border-radius:5px;transition:all .25s" style-hover="background:rgba(255,255,255,.12);color:#fff;border-color:#fff">A CÉGRŐL</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="position:absolute;left:50%;bottom:26px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none">
+      <span style="font-family:'Titillium Web';font-weight:600;font-size:11px;letter-spacing:3px;color:#b7bcb0">GÖRGESSEN</span>
+      <div style="width:24px;height:38px;border:1.5px solid rgba(255,255,255,.4);border-radius:14px;position:relative"><span style="position:absolute;left:50%;top:8px;transform:translateX(-50%);width:4px;height:8px;border-radius:2px;background:#8bc46f;animation:scrollcue 1.6s ease-in-out infinite"></span></div>
+    </div>
+    <div style="position:absolute;right:32px;bottom:26px;pointer-events:none">
+      <div style="display:flex;align-items:center;gap:12px;background:rgba(15,17,14,.55);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:12px 16px">
+        <span style="width:8px;height:8px;border-radius:50%;background:#8bc46f;flex:none"></span>
+        <div style="line-height:1.3"><div style="color:#fff;font-family:'Titillium Web';font-weight:700;font-size:13px">Richter Központ · Az Év Irodája 2024</div><div style="color:#b7bcb0;font-size:12px">Budapest · Gyömrői út · 17 400 m²</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MARQUEE -->
+  <div style="background:#3a6e2c;overflow:hidden;padding:16px 0">
+    <div style="display:flex;width:max-content;animation:marquee 32s linear infinite;font-family:'Titillium Web';font-weight:600;font-size:16px;letter-spacing:2px;color:#c9e2ba">
+      <span style="display:flex;gap:0">
+        <span style="padding:0 26px">PRECIZITÁS</span><span style="color:#8bc46f">·</span><span style="padding:0 26px">MINŐSÉG</span><span style="color:#8bc46f">·</span><span style="padding:0 26px">MEGBÍZHATÓSÁG</span><span style="color:#8bc46f">·</span><span style="padding:0 26px">HATÁRIDŐ</span><span style="color:#8bc46f">·</span><span style="padding:0 26px">PRÉMIUM</span><span style="color:#8bc46f">·</span><span style="padding:0 26px">PARTNERSÉG</span><span style="color:#8bc46f">·</span><span style="padding:0 26px">SZAKÉRTELEM</span><span style="color:#8bc46f">·</span><span style="padding:0 26px">FIT-OUT</span><span style="color:#8bc46f">·</span>
+      </span>
+      <span style="display:flex;gap:0" aria-hidden="true">
+        <span style="padding:0 26px">PRECIZITÁS</span><span style="color:#8bc46f">·</span><span style="padding:0 26px">MINŐSÉG</span><span style="color:#8bc46f">·</span><span style="padding:0 26px">MEGBÍZHATÓSÁG</span><span style="color:#8bc46f">·</span><span style="padding:0 26px">HATÁRIDŐ</span><span style="color:#8bc46f">·</span><span style="padding:0 26px">PRÉMIUM</span><span style="color:#8bc46f">·</span><span style="padding:0 26px">PARTNERSÉG</span><span style="color:#8bc46f">·</span><span style="padding:0 26px">SZAKÉRTELEM</span><span style="color:#8bc46f">·</span><span style="padding:0 26px">FIT-OUT</span><span style="color:#8bc46f">·</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- 01 — A CÉGRŐL -->
+  <section id="epronex" style="position:relative;max-width:1240px;margin:0 auto;padding:104px 32px 90px;overflow:hidden">
+    <div aria-hidden="true" style="position:absolute;top:60px;right:-6px;writing-mode:vertical-rl;font-family:'Titillium Web';font-weight:700;font-size:70px;letter-spacing:8px;color:#f0f3ec;pointer-events:none;user-select:none">EPRONEX</div>
+    <div style="position:relative">
+      <div data-reveal style="font-family:'Titillium Web';font-weight:700;font-size:13px;letter-spacing:2px;color:#4c8c3a;margin-bottom:18px">01 — A CÉGRŐL</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center">
+        <div data-reveal>
+          <h2 style="font-size:38px;font-weight:600;line-height:1.1;letter-spacing:-.6px">Magyar tulajdonú generálkivitelező, minden szegmensben jelen</h2>
+          <div style="width:56px;height:4px;background:#4c8c3a;margin:22px 0 26px"></div>
+          <div style="color:#3a3d38;font-size:16.5px;line-height:1.78;display:flex;flex-direction:column;gap:16px">
+            <p style="margin:0">Az Epronex Építő Zrt. egy magyar tulajdonban lévő vállalkozás, melyet 2015-ben alapított három, széleskörű tervezői és kivitelezői tapasztalattal rendelkező szakember.</p>
+            <p style="margin:0">Vállalatunk a retail szektorban végzett fit-out munkákkal vált ismertté, mára azonban az építőipari generálkivitelezés és a fit-out munkák piacán egyaránt markánsan jelen vagyunk. Az iroda-kivitelezéseknél a 10 000 m² feletti szegmensben is dolgozunk, és az ipari épületek üzletágában is stabilan jelen vagyunk.</p>
+            <p style="margin:0">Büszkék vagyunk rá, hogy megrendelőinkkel és partnereinkkel hosszú távú, jó kapcsolatot alakítunk ki és tartunk fenn; csapatunk szakmailag folyamatosan fejlődik.</p>
+          </div>
+        </div>
+        <div data-reveal style="height:480px;border-radius:10px;overflow:hidden"><img src="assets/ref-computacenter.jpg" alt="Epronex projekt" style="width:100%;height:100%;object-fit:cover"></div>
+      </div>
+    </div>
+
+    <!-- COUNT-UP STATS -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:72px">
+      <div data-reveal style="border-top:3px solid #4c8c3a;padding-top:22px"><div style="font-family:'Titillium Web';font-weight:700;font-size:46px;color:#1b1d1a;line-height:1"><span data-count="10" data-suffix="+">0</span></div><div style="color:#71766e;font-size:14.5px;margin-top:8px">év tapasztalat</div></div>
+      <div data-reveal style="border-top:3px solid #4c8c3a;padding-top:22px"><div style="font-family:'Titillium Web';font-weight:700;font-size:46px;color:#1b1d1a;line-height:1"><span data-count="3">0</span></div><div style="color:#71766e;font-size:14.5px;margin-top:8px">üzletág · retail · iroda · ipari</div></div>
+      <div data-reveal style="border-top:3px solid #4c8c3a;padding-top:22px"><div style="font-family:'Titillium Web';font-weight:700;font-size:46px;color:#1b1d1a;line-height:1"><span data-count="17400" data-suffix=" m²">0</span></div><div style="color:#71766e;font-size:14.5px;margin-top:8px">legnagyobb iroda-projekt</div></div>
+      <div data-reveal style="border-top:3px solid #4c8c3a;padding-top:22px"><div style="font-family:'Titillium Web';font-weight:700;font-size:46px;color:#1b1d1a;line-height:1"><span data-count="2">0</span></div><div style="color:#71766e;font-size:14.5px;margin-top:8px">Az Év Irodája díj</div></div>
+    </div>
+
+    <!-- WHY US — numbered cards -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:56px">
+      <div data-reveal style="background:#f4f4f1;border:1px solid #e7e8e3;border-radius:10px;padding:34px 30px">
+        <div style="font-family:'Titillium Web';font-weight:700;font-size:20px;color:#8bc46f;letter-spacing:1px">01</div>
+        <h3 style="font-size:19px;font-weight:600;margin-top:12px">Egy kézben</h3>
+        <p style="color:#3a3d38;font-size:15px;line-height:1.65;margin:10px 0 0">Az előkészítéstől a szakági koordináción át a kulcsrakész átadásig egyetlen felelős partner viszi végig a projektet.</p>
+      </div>
+      <div data-reveal style="background:#f4f4f1;border:1px solid #e7e8e3;border-radius:10px;padding:34px 30px">
+        <div style="font-family:'Titillium Web';font-weight:700;font-size:20px;color:#8bc46f;letter-spacing:1px">02</div>
+        <h3 style="font-size:19px;font-weight:600;margin-top:12px">Prémium minőség</h3>
+        <p style="color:#3a3d38;font-size:15px;line-height:1.65;margin:10px 0 0">Precíz kivitelezés és igényes részletminőség — díjnyertes irodáktól a nagy nemzetközi világmárkák üzleteiig.</p>
+      </div>
+      <div data-reveal style="background:#f4f4f1;border:1px solid #e7e8e3;border-radius:10px;padding:34px 30px">
+        <div style="font-family:'Titillium Web';font-weight:700;font-size:20px;color:#8bc46f;letter-spacing:1px">03</div>
+        <h3 style="font-size:19px;font-weight:600;margin-top:12px">Határidő-tartás</h3>
+        <p style="color:#3a3d38;font-size:15px;line-height:1.65;margin:10px 0 0">Jól tervezhető ütemezés és pontos átadás — a megrendelői igényekhez rugalmasan igazodva.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 — TEVÉKENYSÉGEK / ÉRTÉKLÁNC -->
+  <section id="tevekenyseg" style="position:relative;background:#1b1d1a;color:#fff;overflow:hidden">
+    <div aria-hidden="true" style="position:absolute;top:70px;left:-8px;writing-mode:vertical-rl;font-family:'Titillium Web';font-weight:700;font-size:70px;letter-spacing:8px;color:rgba(255,255,255,.05);pointer-events:none;user-select:none">ÉRTÉK·LÁNC</div>
+    <div style="position:relative;max-width:1240px;margin:0 auto;padding:104px 32px">
+      <div data-reveal style="font-family:'Titillium Web';font-weight:700;font-size:13px;letter-spacing:2px;color:#8bc46f;margin-bottom:16px">02 — TEVÉKENYSÉGEK</div>
+      <div data-reveal style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:20px;margin-bottom:56px">
+        <h2 style="font-size:40px;font-weight:600;letter-spacing:-.6px;max-width:620px;line-height:1.08">Az előkészítéstől a kulcsrakész átadásig</h2>
+        <p style="color:#b7bcb0;font-size:16px;line-height:1.6;max-width:380px;margin:0">Retail üzletek, irodaterek és ipari csarnokok — a teljes folyamatot egy összehangolt csapat viszi végig.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:1px solid rgba(255,255,255,.14)">
+        <div data-reveal style="padding:30px 22px 30px 0;border-right:1px solid rgba(255,255,255,.14)"><div style="font-family:'Titillium Web';font-weight:700;font-size:15px;color:#8bc46f">01</div><h3 style="font-size:18px;font-weight:600;margin-top:14px">Előkészítés</h3><p style="color:#9aa093;font-size:14px;line-height:1.6;margin:8px 0 0">Igényfelmérés, ajánlat, ütemterv és költségtervezés.</p></div>
+        <div data-reveal style="padding:30px 22px;border-right:1px solid rgba(255,255,255,.14)"><div style="font-family:'Titillium Web';font-weight:700;font-size:15px;color:#8bc46f">02</div><h3 style="font-size:18px;font-weight:600;margin-top:14px">Koordináció</h3><p style="color:#9aa093;font-size:14px;line-height:1.6;margin:8px 0 0">Szakági tervegyeztetés és műszaki koordináció egy kézben.</p></div>
+        <div data-reveal style="padding:30px 22px;border-right:1px solid rgba(255,255,255,.14)"><div style="font-family:'Titillium Web';font-weight:700;font-size:15px;color:#8bc46f">03</div><h3 style="font-size:18px;font-weight:600;margin-top:14px">Kivitelezés</h3><p style="color:#9aa093;font-size:14px;line-height:1.6;margin:8px 0 0">Generálkivitelezés az alapozástól a szerkezetépítésig.</p></div>
+        <div data-reveal style="padding:30px 22px;border-right:1px solid rgba(255,255,255,.14)"><div style="font-family:'Titillium Web';font-weight:700;font-size:15px;color:#8bc46f">04</div><h3 style="font-size:18px;font-weight:600;margin-top:14px">Fit-out</h3><p style="color:#9aa093;font-size:14px;line-height:1.6;margin:8px 0 0">Belsőépítészet és befejező munkák márkakonzisztensen.</p></div>
+        <div data-reveal style="padding:30px 0 30px 22px"><div style="font-family:'Titillium Web';font-weight:700;font-size:15px;color:#8bc46f">05</div><h3 style="font-size:18px;font-weight:600;margin-top:14px">Átadás</h3><p style="color:#9aa093;font-size:14px;line-height:1.6;margin:8px 0 0">Kulcsrakész átadás, dokumentáció és garancia.</p></div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:64px">
+        <div data-reveal style="background:#232620;border:1px solid #33362f;border-radius:10px;padding:36px 30px">
+          <div style="width:58px;height:58px;border-radius:13px;background:rgba(139,196,111,.14);display:flex;align-items:center;justify-content:center;margin-bottom:22px"><svg width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M4 26V11l11-7 11 7v15" stroke="#8bc46f" stroke-width="1.8" stroke-linejoin="round"/><path d="M11 26v-7h8v7" stroke="#8bc46f" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+          <h3 style="font-size:20px;font-weight:600">Generálkivitelezés</h3>
+          <p style="color:#9aa093;font-size:15px;line-height:1.68;margin:12px 0 0">Teljes körű, szakági koordinációval végzett kivitelezés — a 10 000 m² feletti irodaszegmensben is.</p>
+        </div>
+        <div data-reveal style="background:#232620;border:1px solid #33362f;border-radius:10px;padding:36px 30px">
+          <div style="width:58px;height:58px;border-radius:13px;background:rgba(139,196,111,.14);display:flex;align-items:center;justify-content:center;margin-bottom:22px"><svg width="30" height="30" viewBox="0 0 30 30" fill="none"><rect x="4" y="6" width="22" height="16" rx="1.5" stroke="#8bc46f" stroke-width="1.8"/><path d="M4 22h22M11 26h8M9 11h5M9 15h9" stroke="#8bc46f" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+          <h3 style="font-size:20px;font-weight:600">Fit-out &amp; belsőépítészet</h3>
+          <p style="color:#9aa093;font-size:15px;line-height:1.68;margin:12px 0 0">Retail üzletek és irodaterek kulcsrakész kialakítása — a kis design üzletektől a díjnyertes közösségi terekig.</p>
+        </div>
+        <div data-reveal style="background:#232620;border:1px solid #33362f;border-radius:10px;padding:36px 30px">
+          <div style="width:58px;height:58px;border-radius:13px;background:rgba(139,196,111,.14);display:flex;align-items:center;justify-content:center;margin-bottom:22px"><svg width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M3 26V14l7-4v4l7-4v16M17 26V10l10 5v11" stroke="#8bc46f" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+          <h3 style="font-size:20px;font-weight:600">Ipari kivitelezés</h3>
+          <p style="color:#9aa093;font-size:15px;line-height:1.68;margin:12px 0 0">Gyártó- és logisztikai épületek, technológiai terek kivitelezése ipari léptékben, pontos ütemezéssel.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 — REFERENCIÁK -->
+  <section id="referenciak" style="position:relative;background:#f4f4f1;border-bottom:1px solid #e7e8e3;overflow:hidden">
+    <div aria-hidden="true" style="position:absolute;top:70px;right:-6px;writing-mode:vertical-rl;font-family:'Titillium Web';font-weight:700;font-size:70px;letter-spacing:8px;color:#e8ece1;pointer-events:none;user-select:none">REFE·RENCIA</div>
+    <div style="position:relative;max-width:1300px;margin:0 auto;padding:104px 32px">
+      <div data-reveal style="font-family:'Titillium Web';font-weight:700;font-size:13px;letter-spacing:2px;color:#4c8c3a;margin-bottom:16px">03 — REFERENCIÁK</div>
+      <div data-reveal style="text-align:center;margin-bottom:34px">
+        <h2 style="font-size:40px;font-weight:600;letter-spacing:-.6px">Díjnyertes és nagyvállalati projektek</h2>
+        <div style="width:56px;height:4px;background:#4c8c3a;margin:20px auto 0"></div>
+      </div>
+      <div data-reveal style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:40px">
+        <button data-filter="all" onClick="{{ filter }}" style="font-family:'Titillium Web';font-weight:700;font-size:13px;letter-spacing:.6px;padding:11px 22px;border:1px solid #d8dad3;border-radius:40px;background:transparent;color:#3a3d38;cursor:pointer;transition:all .2s">ÖSSZES</button>
+        <button data-filter="iroda" onClick="{{ filter }}" style="font-family:'Titillium Web';font-weight:700;font-size:13px;letter-spacing:.6px;padding:11px 22px;border:1px solid #d8dad3;border-radius:40px;background:transparent;color:#3a3d38;cursor:pointer;transition:all .2s">IRODA</button>
+        <button data-filter="retail" onClick="{{ filter }}" style="font-family:'Titillium Web';font-weight:700;font-size:13px;letter-spacing:.6px;padding:11px 22px;border:1px solid #d8dad3;border-radius:40px;background:transparent;color:#3a3d38;cursor:pointer;transition:all .2s">RETAIL</button>
+        <button data-filter="ipari" onClick="{{ filter }}" style="font-family:'Titillium Web';font-weight:700;font-size:13px;letter-spacing:.6px;padding:11px 22px;border:1px solid #d8dad3;border-radius:40px;background:transparent;color:#3a3d38;cursor:pointer;transition:all .2s">IPARI</button>
+        <button data-filter="egeszsegugy" onClick="{{ filter }}" style="font-family:'Titillium Web';font-weight:700;font-size:13px;letter-spacing:.6px;padding:11px 22px;border:1px solid #d8dad3;border-radius:40px;background:transparent;color:#3a3d38;cursor:pointer;transition:all .2s">EGÉSZSÉGÜGY</button>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
+        <div data-reveal data-cat="iroda" style="position:relative;height:260px;border-radius:9px;overflow:hidden;background:#000"><img src="assets/ref-richter.jpg" alt="Richter Központ" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s,opacity .4s" style-hover="transform:scale(1.06);opacity:.82"><span style="position:absolute;top:14px;left:14px;font-family:'Titillium Web';font-weight:700;font-size:10px;letter-spacing:.8px;color:#1b1d1a;background:#8bc46f;padding:5px 11px;border-radius:4px">AZ ÉV IRODÁJA 2024</span><div style="position:absolute;left:0;right:0;bottom:0;padding:44px 20px 18px;background:linear-gradient(transparent,rgba(15,17,14,.92));pointer-events:none"><span style="font-family:'Titillium Web';font-weight:700;font-size:10.5px;letter-spacing:1.2px;color:#8bc46f">GENERÁLKIVITELEZÉS</span><div style="color:#fff;font-family:'Titillium Web';font-weight:700;font-size:19px;margin-top:4px">Richter Központ</div><div style="color:#c9ccc4;font-size:12.5px;margin-top:2px">Budapest · 17 400 m² · látványos átrium</div></div></div>
+        <div data-reveal data-cat="iroda" style="position:relative;height:260px;border-radius:9px;overflow:hidden;background:#000"><img src="assets/ref-benu.jpg" alt="BENU Magyarország" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s,opacity .4s" style-hover="transform:scale(1.06);opacity:.82"><div style="position:absolute;left:0;right:0;bottom:0;padding:44px 20px 18px;background:linear-gradient(transparent,rgba(15,17,14,.92));pointer-events:none"><span style="font-family:'Titillium Web';font-weight:700;font-size:10.5px;letter-spacing:1.2px;color:#8bc46f">IRODAI FIT-OUT</span><div style="color:#fff;font-family:'Titillium Web';font-weight:700;font-size:19px;margin-top:4px">BENU Magyarország</div><div style="color:#c9ccc4;font-size:12.5px;margin-top:2px">Budapest · irodaterület</div></div></div>
+        <div data-reveal data-cat="retail" style="position:relative;height:260px;border-radius:9px;overflow:hidden;background:#000"><img src="assets/ref-newyorker.jpg" alt="New Yorker" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s,opacity .4s" style-hover="transform:scale(1.06);opacity:.82"><div style="position:absolute;left:0;right:0;bottom:0;padding:44px 20px 18px;background:linear-gradient(transparent,rgba(15,17,14,.92));pointer-events:none"><span style="font-family:'Titillium Web';font-weight:700;font-size:10.5px;letter-spacing:1.2px;color:#8bc46f">RETAIL · GENERÁLKIVITELEZÉS</span><div style="color:#fff;font-family:'Titillium Web';font-weight:700;font-size:19px;margin-top:4px">New Yorker</div><div style="color:#c9ccc4;font-size:12.5px;margin-top:2px">Országosan · 2015-től folyamatosan</div></div></div>
+        <div data-reveal data-cat="egeszsegugy" style="position:relative;height:260px;border-radius:9px;overflow:hidden;background:#000"><img src="assets/ref-medicover.jpg" alt="Medicover Eiffel Klinika" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s,opacity .4s" style-hover="transform:scale(1.06);opacity:.82"><div style="position:absolute;left:0;right:0;bottom:0;padding:44px 20px 18px;background:linear-gradient(transparent,rgba(15,17,14,.92));pointer-events:none"><span style="font-family:'Titillium Web';font-weight:700;font-size:10.5px;letter-spacing:1.2px;color:#8bc46f">EGÉSZSÉGÜGY · GENERÁLKIVITELEZÉS</span><div style="color:#fff;font-family:'Titillium Web';font-weight:700;font-size:19px;margin-top:4px">Medicover Eiffel Klinika</div><div style="color:#c9ccc4;font-size:12.5px;margin-top:2px">Budapest · Teréz körút · 2400 m²</div></div></div>
+        <div data-reveal data-cat="iroda" style="position:relative;height:260px;border-radius:9px;overflow:hidden;background:#000"><img src="assets/ref-computacenter.jpg" alt="Computacenter" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s,opacity .4s" style-hover="transform:scale(1.06);opacity:.82"><div style="position:absolute;left:0;right:0;bottom:0;padding:44px 20px 18px;background:linear-gradient(transparent,rgba(15,17,14,.92));pointer-events:none"><span style="font-family:'Titillium Web';font-weight:700;font-size:10.5px;letter-spacing:1.2px;color:#8bc46f">IRODAI FIT-OUT</span><div style="color:#fff;font-family:'Titillium Web';font-weight:700;font-size:19px;margin-top:4px">Computacenter</div><div style="color:#c9ccc4;font-size:12.5px;margin-top:2px">Budapest · irodaterület</div></div></div>
+        <div data-reveal data-cat="retail" style="position:relative;height:260px;border-radius:9px;overflow:hidden;background:#000"><img src="assets/ref-kfc.jpg" alt="KFC Budaörs" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s,opacity .4s" style-hover="transform:scale(1.06);opacity:.82"><div style="position:absolute;left:0;right:0;bottom:0;padding:44px 20px 18px;background:linear-gradient(transparent,rgba(15,17,14,.92));pointer-events:none"><span style="font-family:'Titillium Web';font-weight:700;font-size:10.5px;letter-spacing:1.2px;color:#8bc46f">RETAIL · VENDÉGLÁTÁS</span><div style="color:#fff;font-family:'Titillium Web';font-weight:700;font-size:19px;margin-top:4px">KFC Budaörs</div><div style="color:#c9ccc4;font-size:12.5px;margin-top:2px">Budaörs</div></div></div>
+        <div data-reveal data-cat="ipari" style="position:relative;height:260px;border-radius:9px;overflow:hidden;background:#000"><img src="assets/ref-gubacsi.jpg" alt="Gubacsi Logisztikai Park" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s,opacity .4s" style-hover="transform:scale(1.06);opacity:.82"><div style="position:absolute;left:0;right:0;bottom:0;padding:44px 20px 18px;background:linear-gradient(transparent,rgba(15,17,14,.92));pointer-events:none"><span style="font-family:'Titillium Web';font-weight:700;font-size:10.5px;letter-spacing:1.2px;color:#8bc46f">IPAR · LOGISZTIKA</span><div style="color:#fff;font-family:'Titillium Web';font-weight:700;font-size:19px;margin-top:4px">Gubacsi Logisztikai Park</div><div style="color:#c9ccc4;font-size:12.5px;margin-top:2px">Budapest · 6790 m² · OTP Ingatlanalap</div></div></div>
+        <div data-reveal data-cat="retail" style="position:relative;height:260px;border-radius:9px;overflow:hidden;background:#000"><img src="assets/ref-hm.jpg" alt="H&amp;M" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s,opacity .4s" style-hover="transform:scale(1.06);opacity:.82"><div style="position:absolute;left:0;right:0;bottom:0;padding:44px 20px 18px;background:linear-gradient(transparent,rgba(15,17,14,.92));pointer-events:none"><span style="font-family:'Titillium Web';font-weight:700;font-size:10.5px;letter-spacing:1.2px;color:#8bc46f">RETAIL</span><div style="color:#fff;font-family:'Titillium Web';font-weight:700;font-size:19px;margin-top:4px">H&amp;M</div><div style="color:#c9ccc4;font-size:12.5px;margin-top:2px">Több helyszín</div></div></div>
+        <div data-reveal data-cat="iroda" style="position:relative;height:260px;border-radius:9px;overflow:hidden;background:#000"><img src="assets/ref-margit.jpg" alt="Margit Palace" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s,opacity .4s" style-hover="transform:scale(1.06);opacity:.82"><div style="position:absolute;left:0;right:0;bottom:0;padding:44px 20px 18px;background:linear-gradient(transparent,rgba(15,17,14,.92));pointer-events:none"><span style="font-family:'Titillium Web';font-weight:700;font-size:10.5px;letter-spacing:1.2px;color:#8bc46f">IRODAHÁZ · KÖZÖSSÉGI TÉR</span><div style="color:#fff;font-family:'Titillium Web';font-weight:700;font-size:19px;margin-top:4px">Margit Palace</div><div style="color:#c9ccc4;font-size:12.5px;margin-top:2px">Budapest · Henger utca · 2017</div></div></div>
+        <div data-reveal data-cat="retail" style="position:relative;height:260px;border-radius:9px;overflow:hidden;background:#000"><img src="assets/ref-pepco.jpg" alt="PEPCO" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s,opacity .4s" style-hover="transform:scale(1.06);opacity:.82"><div style="position:absolute;left:0;right:0;bottom:0;padding:44px 20px 18px;background:linear-gradient(transparent,rgba(15,17,14,.92));pointer-events:none"><span style="font-family:'Titillium Web';font-weight:700;font-size:10.5px;letter-spacing:1.2px;color:#8bc46f">RETAIL</span><div style="color:#fff;font-family:'Titillium Web';font-weight:700;font-size:19px;margin-top:4px">PEPCO</div><div style="color:#c9ccc4;font-size:12.5px;margin-top:2px">Több helyszín</div></div></div>
+        <div data-reveal data-cat="ipari" style="position:relative;height:260px;border-radius:9px;overflow:hidden;background:#000"><img src="assets/ref-egis.jpg" alt="EGIS" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s,opacity .4s" style-hover="transform:scale(1.06);opacity:.82"><div style="position:absolute;left:0;right:0;bottom:0;padding:44px 20px 18px;background:linear-gradient(transparent,rgba(15,17,14,.92));pointer-events:none"><span style="font-family:'Titillium Web';font-weight:700;font-size:10.5px;letter-spacing:1.2px;color:#8bc46f">IPARI · GÉPÉSZET</span><div style="color:#fff;font-family:'Titillium Web';font-weight:700;font-size:19px;margin-top:4px">EGIS</div><div style="color:#c9ccc4;font-size:12.5px;margin-top:2px">Budapest</div></div></div>
+        <div data-reveal data-cat="iroda" style="position:relative;height:260px;border-radius:9px;overflow:hidden;background:#000"><img src="assets/ref-trivium.jpg" alt="Trivium Packaging" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s,opacity .4s" style-hover="transform:scale(1.06);opacity:.82"><div style="position:absolute;left:0;right:0;bottom:0;padding:44px 20px 18px;background:linear-gradient(transparent,rgba(15,17,14,.92));pointer-events:none"><span style="font-family:'Titillium Web';font-weight:700;font-size:10.5px;letter-spacing:1.2px;color:#8bc46f">IRODAI FIT-OUT</span><div style="color:#fff;font-family:'Titillium Web';font-weight:700;font-size:19px;margin-top:4px">Trivium Packaging BSC</div><div style="color:#c9ccc4;font-size:12.5px;margin-top:2px">Budapest</div></div></div>
+        <div data-reveal data-cat="retail" style="position:relative;height:260px;border-radius:9px;overflow:hidden;background:#000"><img src="assets/ref-icentre.jpg" alt="iCentre" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s,opacity .4s" style-hover="transform:scale(1.06);opacity:.82"><div style="position:absolute;left:0;right:0;bottom:0;padding:44px 20px 18px;background:linear-gradient(transparent,rgba(15,17,14,.92));pointer-events:none"><span style="font-family:'Titillium Web';font-weight:700;font-size:10.5px;letter-spacing:1.2px;color:#8bc46f">RETAIL</span><div style="color:#fff;font-family:'Titillium Web';font-weight:700;font-size:19px;margin-top:4px">iCentre</div><div style="color:#c9ccc4;font-size:12.5px;margin-top:2px">Apple Premium Reseller</div></div></div>
+        <div data-reveal data-cat="retail" style="position:relative;height:260px;border-radius:9px;overflow:hidden;background:#000"><img src="assets/ref-bav.jpg" alt="BÁV Art" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s,opacity .4s" style-hover="transform:scale(1.06);opacity:.82"><div style="position:absolute;left:0;right:0;bottom:0;padding:44px 20px 18px;background:linear-gradient(transparent,rgba(15,17,14,.92));pointer-events:none"><span style="font-family:'Titillium Web';font-weight:700;font-size:10.5px;letter-spacing:1.2px;color:#8bc46f">RETAIL · AUKCIÓSHÁZ</span><div style="color:#fff;font-family:'Titillium Web';font-weight:700;font-size:19px;margin-top:4px">BÁV Art</div><div style="color:#c9ccc4;font-size:12.5px;margin-top:2px">Budapest · Szent István körút</div></div></div>
+        <div data-reveal data-cat="ipari" style="position:relative;height:260px;border-radius:9px;overflow:hidden;background:#000"><img src="assets/ref-medicontur.jpg" alt="Medicontur" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s,opacity .4s" style-hover="transform:scale(1.06);opacity:.82"><div style="position:absolute;left:0;right:0;bottom:0;padding:44px 20px 18px;background:linear-gradient(transparent,rgba(15,17,14,.92));pointer-events:none"><span style="font-family:'Titillium Web';font-weight:700;font-size:10.5px;letter-spacing:1.2px;color:#8bc46f">IPARI · TECHNOLÓGIA</span><div style="color:#fff;font-family:'Titillium Web';font-weight:700;font-size:19px;margin-top:4px">Medicontur</div><div style="color:#c9ccc4;font-size:12.5px;margin-top:2px">Zsámbék</div></div></div>
+        <div data-reveal data-cat="iroda" style="position:relative;height:260px;border-radius:9px;overflow:hidden;background:#000"><img src="assets/ref-hungaria.jpg" alt="Hungária Center" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s,opacity .4s" style-hover="transform:scale(1.06);opacity:.82"><div style="position:absolute;left:0;right:0;bottom:0;padding:44px 20px 18px;background:linear-gradient(transparent,rgba(15,17,14,.92));pointer-events:none"><span style="font-family:'Titillium Web';font-weight:700;font-size:10.5px;letter-spacing:1.2px;color:#8bc46f">IRODAHÁZ</span><div style="color:#fff;font-family:'Titillium Web';font-weight:700;font-size:19px;margin-top:4px">Hungária Center</div><div style="color:#c9ccc4;font-size:12.5px;margin-top:2px">Budapest</div></div></div>
+        <div data-reveal data-cat="iroda" style="position:relative;height:260px;border-radius:9px;overflow:hidden;background:#000"><img src="assets/ref-otpcsucs.jpg" alt="OTP Csúcs közösségi tér" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s,opacity .4s" style-hover="transform:scale(1.06);opacity:.82"><div style="position:absolute;left:0;right:0;bottom:0;padding:44px 20px 18px;background:linear-gradient(transparent,rgba(15,17,14,.92));pointer-events:none"><span style="font-family:'Titillium Web';font-weight:700;font-size:10.5px;letter-spacing:1.2px;color:#8bc46f">KÖZÖSSÉGI TÉR</span><div style="color:#fff;font-family:'Titillium Web';font-weight:700;font-size:19px;margin-top:4px">OTP Csúcs</div><div style="color:#c9ccc4;font-size:12.5px;margin-top:2px">Budapest</div></div></div>
+      </div>
+
+      <div data-reveal style="text-align:center;margin-top:48px">
+        <a href="Referenciak.dc.html" style="display:inline-flex;align-items:center;gap:12px;background:#4c8c3a;color:#fff;font-family:'Titillium Web';font-weight:700;font-size:14px;letter-spacing:1px;padding:16px 34px;border-radius:5px;transition:background .25s" style-hover="background:#5aa843;color:#fff">ÖSSZES REFERENCIA MEGTEKINTÉSE
+          <svg width="20" height="12" viewBox="0 0 22 14" fill="none"><path d="M1 7h19M15 2l5 5-5 5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <!-- ELISMERÉSEK -->
+      <div data-reveal style="margin-top:56px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+        <div style="background:#fff;border:1px solid #e7e8e3;border-radius:10px;padding:28px 26px;display:flex;gap:16px;align-items:flex-start"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" style="flex:none"><path d="M8 3h8v3a4 4 0 0 1-8 0V3zM6 4H3v2a3 3 0 0 0 3 3M18 4h3v2a3 3 0 0 1-3 3M9 14h6l-1 4h-4l-1-4zM8 21h8" stroke="#4c8c3a" stroke-width="1.5" stroke-linejoin="round"/></svg><div><div style="font-family:'Titillium Web';font-weight:600;font-size:15.5px">Az Év Irodája 2024</div><div style="color:#71766e;font-size:13.5px;margin-top:3px">győztes — Richter Központ</div></div></div>
+        <div style="background:#fff;border:1px solid #e7e8e3;border-radius:10px;padding:28px 26px;display:flex;gap:16px;align-items:flex-start"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" style="flex:none"><path d="M8 3h8v3a4 4 0 0 1-8 0V3zM6 4H3v2a3 3 0 0 0 3 3M18 4h3v2a3 3 0 0 1-3 3M9 14h6l-1 4h-4l-1-4zM8 21h8" stroke="#4c8c3a" stroke-width="1.5" stroke-linejoin="round"/></svg><div><div style="font-family:'Titillium Web';font-weight:600;font-size:15.5px">Az Év Irodája 2018</div><div style="color:#71766e;font-size:13.5px;margin-top:3px">győztes — Egis közösségi tér</div></div></div>
+        <div style="background:#fff;border:1px solid #e7e8e3;border-radius:10px;padding:28px 26px;display:flex;gap:16px;align-items:flex-start"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" style="flex:none"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5L12 3z" stroke="#4c8c3a" stroke-width="1.5" stroke-linejoin="round"/></svg><div><div style="font-family:'Titillium Web';font-weight:600;font-size:15.5px">Az Év Kivitelezője</div><div style="color:#71766e;font-size:13.5px;margin-top:3px">díj döntőse — 2020 · 2021 · 2024</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CÉGVEZETÉS -->
+  <section style="max-width:1240px;margin:0 auto;padding:100px 32px">
+    <div data-reveal style="text-align:center">
+      <div style="font-family:'Titillium Web';font-weight:700;font-size:13px;letter-spacing:2px;color:#4c8c3a;margin-bottom:12px">CÉGVEZETÉS</div>
+      <h2 style="font-size:32px;font-weight:600;letter-spacing:-.4px">Akik a projektek mögött állnak</h2>
+      <div style="width:56px;height:4px;background:#4c8c3a;margin:18px auto 0"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2,minmax(0,300px));gap:34px;justify-content:center;margin-top:44px">
+      <div data-reveal style="text-align:center">
+        <div style="border-radius:10px;overflow:hidden;aspect-ratio:1/1"><img src="assets/varga-gyorgy.jpg" alt="Varga György" style="width:100%;height:100%;object-fit:cover"></div>
+        <div style="font-family:'Titillium Web';font-weight:600;font-size:20px;margin-top:18px;letter-spacing:.5px">VARGA GYÖRGY</div>
+        <div style="color:#71766e;font-size:14px;margin-top:2px">Ügyvezető</div>
+      </div>
+      <div data-reveal style="text-align:center">
+        <div style="border-radius:10px;overflow:hidden;aspect-ratio:1/1"><img src="assets/szabo-adam.jpg" alt="Szabó Ádám" style="width:100%;height:100%;object-fit:cover"></div>
+        <div style="font-family:'Titillium Web';font-weight:600;font-size:20px;margin-top:18px;letter-spacing:.5px">SZABÓ ÁDÁM</div>
+        <div style="color:#71766e;font-size:14px;margin-top:2px">Értékesítési vezető</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 — KARRIER -->
+  <section id="karrier" style="position:relative;overflow:hidden;background:#1b1d1a">
+    <div ref="{{ karrierRef }}" style="position:absolute;inset:-70px 0;opacity:.3;will-change:transform"><img src="assets/ref-otp2.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,17,14,.93),rgba(15,17,14,.62));pointer-events:none"></div>
+    <div style="position:relative;max-width:1240px;margin:0 auto;padding:100px 32px">
+      <div data-reveal style="max-width:580px">
+        <div style="font-family:'Titillium Web';font-weight:700;font-size:13px;letter-spacing:2px;color:#8bc46f;margin-bottom:16px">04 — KARRIER</div>
+        <h2 style="color:#fff;font-size:38px;font-weight:600;line-height:1.1;letter-spacing:-.5px">Építsük együtt a következő projektet</h2>
+        <p style="color:#d6d9d0;font-size:17px;line-height:1.7;margin:22px 0 30px">Csapatunk szakmailag folyamatosan fejlődik. Tapasztalt szakembereket és fejlődni vágyó kollégákat keresünk a kivitelezés minden területén — ha a precizitás és a minőség fontos önnek, jó helyen jár.</p>
+        <a href="#kapcsolat" style="background:#4c8c3a;color:#fff;font-family:'Titillium Web';font-weight:700;font-size:14px;letter-spacing:1px;padding:16px 32px;border-radius:5px;display:inline-flex;align-items:center;gap:10px;transition:background .25s" style-hover="background:#5aa843;color:#fff">ÍRJON NEKÜNK
+          <svg width="20" height="12" viewBox="0 0 22 14" fill="none"><path d="M1 7h19M15 2l5 5-5 5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 — KAPCSOLAT -->
+  <section id="kapcsolat" style="position:relative;max-width:1240px;margin:0 auto;padding:100px 32px;overflow:hidden">
+    <div aria-hidden="true" style="position:absolute;top:70px;right:-6px;writing-mode:vertical-rl;font-family:'Titillium Web';font-weight:700;font-size:70px;letter-spacing:8px;color:#f0f3ec;pointer-events:none;user-select:none">KAPCSOLAT</div>
+    <div style="position:relative">
+      <div data-reveal style="text-align:center;margin-bottom:52px">
+        <div style="font-family:'Titillium Web';font-weight:700;font-size:13px;letter-spacing:2px;color:#4c8c3a;margin-bottom:14px">05 — KAPCSOLAT</div>
+        <h2 style="font-size:40px;font-weight:600;letter-spacing:-.6px">Beszéljük meg a következő projektjét!</h2>
+        <div style="width:56px;height:4px;background:#4c8c3a;margin:20px auto 0"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:start">
+        <div data-reveal>
+          <div style="border-radius:10px;overflow:hidden;height:250px;margin-bottom:30px"><img src="assets/kapcsolat.jpg" alt="Epronex" style="width:100%;height:100%;object-fit:cover"></div>
+          <div style="display:flex;flex-direction:column;gap:24px">
+            <div style="display:flex;gap:16px;align-items:flex-start"><span style="width:44px;height:44px;border-radius:10px;background:#eaf1e4;display:flex;align-items:center;justify-content:center;flex:none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-6.5-7-11a7 7 0 0 1 14 0c0 4.5-7 11-7 11z" stroke="#4c8c3a" stroke-width="1.6"/><circle cx="12" cy="10" r="2.5" stroke="#4c8c3a" stroke-width="1.6"/></svg></span><div><div style="font-family:'Titillium Web';font-weight:700;font-size:16px">Cím</div><div style="color:#3a3d38;font-size:15.5px;margin-top:3px">2040 Budaörs, Kamaraerdei út 2.</div></div></div>
+            <div style="display:flex;gap:16px;align-items:flex-start"><span style="width:44px;height:44px;border-radius:10px;background:#eaf1e4;display:flex;align-items:center;justify-content:center;flex:none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5 4h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" stroke="#4c8c3a" stroke-width="1.6" stroke-linejoin="round"/></svg></span><div><div style="font-family:'Titillium Web';font-weight:700;font-size:16px">Telefon</div><a href="tel:+3623814819" style="color:#3a6e2c;font-size:15.5px;margin-top:3px;display:inline-block">+36 23 814 819</a></div></div>
+            <div style="display:flex;gap:16px;align-items:flex-start"><span style="width:44px;height:44px;border-radius:10px;background:#eaf1e4;display:flex;align-items:center;justify-content:center;flex:none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="#4c8c3a" stroke-width="1.6"/><path d="M4 7l8 6 8-6" stroke="#4c8c3a" stroke-width="1.6" stroke-linecap="round"/></svg></span><div><div style="font-family:'Titillium Web';font-weight:700;font-size:16px">E-mail</div><a href="mailto:info@epronex.hu" style="color:#3a6e2c;font-size:15.5px;margin-top:3px;display:inline-block">info@epronex.hu</a></div></div>
+          </div>
+        </div>
+        <form data-reveal onSubmit="{{ onSubmit }}" style="background:#fff;border:1px solid #e7e8e3;border-radius:10px;padding:36px;display:grid;grid-template-columns:1fr 1fr;gap:24px">
+          <label style="grid-column:1 / -1;display:flex;flex-direction:column;gap:10px;font-family:'Titillium Web';font-weight:400;font-size:16px;text-transform:none;letter-spacing:0;color:#6b6f68"><span>Teljes név <span style="color:#e2574c">*</span></span>
+            <input required type="text" style="font-family:'Titillium Web';font-size:16px;padding:15px 16px;border:1px solid #d9dbd4;border-radius:8px;background:#fff" style-focus="border-color:#4c8c3a;outline:none">
+          </label>
+          <label style="display:flex;flex-direction:column;gap:10px;font-family:'Titillium Web';font-weight:400;font-size:16px;text-transform:none;letter-spacing:0;color:#6b6f68"><span>E-mail <span style="color:#e2574c">*</span></span>
+            <input required type="email" style="font-family:'Titillium Web';font-size:16px;padding:15px 16px;border:1px solid #d9dbd4;border-radius:8px;background:#fff" style-focus="border-color:#4c8c3a;outline:none">
+          </label>
+          <label style="display:flex;flex-direction:column;gap:10px;font-family:'Titillium Web';font-weight:400;font-size:16px;text-transform:none;letter-spacing:0;color:#6b6f68"><span>Telefonszám <span style="color:#e2574c">*</span></span>
+            <input required type="tel" style="font-family:'Titillium Web';font-size:16px;padding:15px 16px;border:1px solid #d9dbd4;border-radius:8px;background:#fff" style-focus="border-color:#4c8c3a;outline:none">
+          </label>
+          <label style="grid-column:1 / -1;display:flex;flex-direction:column;gap:10px;font-family:'Titillium Web';font-weight:400;font-size:16px;text-transform:none;letter-spacing:0;color:#6b6f68"><span>Milyen ügyben érdeklődik? <span style="color:#e2574c">*</span></span>
+            <select required style="font-family:'Titillium Web';font-size:16px;padding:15px 16px;border:1px solid #d9dbd4;border-radius:8px;background:#fff;color:#4a4a4a;appearance:auto" style-focus="border-color:#4c8c3a;outline:none">
+              <option value="">Válasszon az alábbi lehetőségek közül!</option>
+              <option>Generálkivitelezés</option>
+              <option>Irodai fit-out</option>
+              <option>Retail kivitelezés</option>
+              <option>Ipari / logisztikai projekt</option>
+              <option>Egyéb</option>
+            </select>
+          </label>
+          <label style="grid-column:1 / -1;display:flex;flex-direction:column;gap:10px;font-family:'Titillium Web';font-weight:400;font-size:16px;text-transform:none;letter-spacing:0;color:#6b6f68"><span>Megjegyzés</span>
+            <textarea rows="5" style="font-family:'Titillium Web';font-size:16px;padding:15px 16px;border:1px solid #d9dbd4;border-radius:8px;background:#fff;resize:vertical" style-focus="border-color:#4c8c3a;outline:none"></textarea>
+          </label>
+          <label style="grid-column:1 / -1;display:flex;align-items:flex-start;gap:12px;font-family:'Titillium Web';font-weight:700;font-size:15px;color:#5a5d57;text-transform:none;letter-spacing:0;line-height:1.5"><input required type="checkbox" style="margin-top:3px;width:17px;height:17px;accent-color:#4c8c3a;flex:none"><span>A megjelöléssel elismerem, hogy az <a href="#" style="color:#4c8c3a;font-weight:700" style-hover="color:#3a6e2c">Adatkezelési tájékoztatót</a> elolvastam és elfogadom az abban leírtakat.</span></label>
+          <div style="grid-column:1 / -1;display:flex;justify-content:center;margin-top:8px">
+            <button type="submit" style="font-family:'Titillium Web';font-weight:700;font-size:16px;letter-spacing:1px;background:#6cbb3f;color:#fff;border:none;border-radius:8px;padding:16px 46px;cursor:pointer;transition:background .25s" style-hover="background:#5fa836">ÜZENET KÜLDÉSE</button>
+          </div>
+          <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}"><div style="grid-column:1 / -1;background:#eaf1e4;color:#3a6e2c;border-radius:8px;padding:14px 18px;font-size:15px;font-weight:600;text-align:center">Köszönjük! Üzenetét megkaptuk, hamarosan felvesszük Önnel a kapcsolatot.</div></sc-if>
+        </form>
+      </div>
+
+      <div data-reveal style="text-align:center;margin-top:76px">
+        <div style="font-family:'Titillium Web';font-weight:700;font-size:13px;letter-spacing:2px;color:#71766e">AZ EPRONEX ZRT. KÖZÖSSÉGI OLDALAI</div>
+        <div style="display:flex;gap:16px;justify-content:center;margin-top:20px">
+          <a href="https://www.facebook.com/epronex" target="_blank" rel="noopener" aria-label="Facebook" style="width:52px;height:52px;border-radius:12px;background:#eaf1e4;display:flex;align-items:center;justify-content:center;color:#3a6e2c;transition:all .25s" style-hover="background:#3a6e2c;color:#fff"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M14 8.5V6.8c0-.8.2-1.2 1.4-1.2H17V2.5h-2.6C11.5 2.5 10.4 4 10.4 6.5v2H8.5v3.1h1.9V21.5H14V11.6h2.3l.4-3.1H14z"/></svg></a>
+          <a href="https://www.linkedin.com/company/epronex" target="_blank" rel="noopener" aria-label="LinkedIn" style="width:52px;height:52px;border-radius:12px;background:#eaf1e4;display:flex;align-items:center;justify-content:center;color:#3a6e2c;transition:all .25s" style-hover="background:#3a6e2c;color:#fff"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21H18.6v-5.4c0-1.3-.02-2.96-1.8-2.96-1.8 0-2.08 1.4-2.08 2.86V21H10z"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background:#1b1d1a;color:#c9ccc4">
+    <div style="max-width:1240px;margin:0 auto;padding:60px 32px 32px;display:grid;grid-template-columns:1.5fr 1fr 1.1fr;gap:44px">
+      <div>
+        <div style="background:#fff;border-radius:10px;padding:16px 20px;display:inline-block;margin-bottom:20px"><img src="assets/epronex-logo.png" alt="Epronex — Az építő erő" style="height:56px;width:auto;display:block"></div>
+        <p style="margin:0;font-size:14.5px;line-height:1.7;max-width:340px;color:#9aa093">Generálkivitelezés és fit-out prémium minőségben — retail, iroda és ipari projektek megbízható partnereként, 2015 óta.</p>
+      </div>
+      <div>
+        <div style="font-family:'Titillium Web';font-weight:700;font-size:13px;letter-spacing:1.5px;color:#fff;margin-bottom:18px">OLDALAK</div>
+        <div style="display:flex;flex-direction:column;gap:11px;font-size:14.5px">
+          <a href="#epronex" style="color:#c9ccc4" style-hover="color:#8bc46f">A cégről</a>
+          <a href="#tevekenyseg" style="color:#c9ccc4" style-hover="color:#8bc46f">Tevékenységek</a>
+          <a href="#referenciak" style="color:#c9ccc4" style-hover="color:#8bc46f">Referenciák</a>
+          <a href="#karrier" style="color:#c9ccc4" style-hover="color:#8bc46f">Karrier</a>
+          <a href="#kapcsolat" style="color:#c9ccc4" style-hover="color:#8bc46f">Kapcsolat</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:'Titillium Web';font-weight:700;font-size:13px;letter-spacing:1.5px;color:#fff;margin-bottom:18px">EPRONEX ÉPÍTŐ ZRT.</div>
+        <div style="display:flex;flex-direction:column;gap:9px;font-size:14.5px;color:#9aa093">
+          <span>2040 Budaörs, Kamaraerdei út 2.</span>
+          <span>Adószám: 25301360-2-13</span>
+          <span>Cégjegyzékszám: 13 10 041514</span>
+          <a href="tel:+3623814819" style="color:#c9ccc4" style-hover="color:#8bc46f">Telefon: +36 23 814 819</a>
+          <a href="mailto:info@epronex.hu" style="color:#c9ccc4" style-hover="color:#8bc46f">info@epronex.hu</a>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid #33362f"><div style="max-width:1240px;margin:0 auto;padding:20px 32px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:#7b8073"><span>© 2026 Epronex Építő Zrt. — Az építő erő</span><a href="#" style="color:#7b8073" style-hover="color:#8bc46f">Adatkezelési tájékoztató</a></div></div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { sent: false };
+  renderVals() {
+    return {
+      heroRef: (el) => { this._hero = el; },
+      karrierRef: (el) => { this._karrier = el; },
+      sent: this.state.sent,
+      onSubmit: (e) => { e.preventDefault(); this.setState({ sent: true }); },
+      filter: (e) => { this.setFilter(e.currentTarget.dataset.filter); }
+    };
+  }
+  setFilter(key) {
+    document.querySelectorAll('[data-cat]').forEach(el => {
+      el.style.display = (key === 'all' || el.dataset.cat === key) ? '' : 'none';
+    });
+    document.querySelectorAll('[data-filter]').forEach(b => {
+      const on = b.dataset.filter === key;
+      b.style.background = on ? '#3a6e2c' : 'transparent';
+      b.style.color = on ? '#fff' : '#3a3d38';
+      b.style.borderColor = on ? '#3a6e2c' : '#d8dad3';
+    });
+  }
+  countUp(el) {
+    const target = parseInt(el.dataset.count, 10) || 0;
+    const suffix = el.dataset.suffix || '';
+    const dur = 1500, start = performance.now();
+    const fmt = (n) => n.toLocaleString('hu-HU').replace(/,/g, ' ');
+    const step = (now) => {
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(Math.round(target * eased)) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+  componentDidMount() {
+    this.setFilter('all');
+    this._io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity='1'; e.target.style.transform='none';
+          e.target.querySelectorAll && e.target.querySelectorAll('[data-count]').forEach(c => { if (!c._done) { c._done = true; this.countUp(c); } });
+          if (e.target.matches && e.target.matches('[data-count]') && !e.target._done) { e.target._done = true; this.countUp(e.target); }
+          this._io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
+    document.querySelectorAll('[data-reveal]').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(28px)';
+      el.style.transition = 'opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1)';
+      this._io.observe(el);
+    });
+    setTimeout(() => {
+      document.querySelectorAll('[data-reveal]').forEach(el => { if (getComputedStyle(el).opacity === '0') { el.style.opacity='1'; el.style.transform='none'; } });
+      document.querySelectorAll('[data-count]').forEach(c => { if (!c._done) { c._done = true; this.countUp(c); } });
+    }, 1800);
+    this._onScroll = () => {
+      const y = window.scrollY || window.pageYOffset || 0;
+      if (this._hero) this._hero.style.transform = 'translateY(' + (y * 0.18) + 'px)';
+      if (this._karrier && this._karrier.parentElement) {
+        const r = this._karrier.parentElement.getBoundingClientRect();
+        const prog = (window.innerHeight - r.top) / (window.innerHeight + r.height);
+        this._karrier.style.transform = 'translateY(' + ((prog - 0.5) * 80) + 'px)';
+      }
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    this._onScroll();
+  }
+  componentWillUnmount() {
+    if (this._io) this._io.disconnect();
+    if (this._onScroll) window.removeEventListener('scroll', this._onScroll);
+  }
+}
+</script>
+</body>
+</html>
