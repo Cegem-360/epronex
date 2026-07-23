@@ -25,6 +25,7 @@
   @keyframes floatUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
   @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   @keyframes scrollcue{0%{transform:translateY(0);opacity:0}30%{opacity:1}100%{transform:translateY(16px);opacity:0}}
+  @keyframes heroZoom{from{transform:scale(1.14)}to{transform:scale(1)}}
 </style>
 </helmet>
 
@@ -55,7 +56,7 @@
   <!-- HERO -->
   <div style="position:relative;height:720px;overflow:hidden;background:#1b1d1a">
     <div ref="{{ heroRef }}" style="position:absolute;inset:-90px 0;will-change:transform">
-      <img src="assets/ref-richter.jpg" alt="Richter Gedeon Irodaépület" style="width:100%;height:100%;object-fit:cover">
+      <img src="assets/ref-richter.jpg" alt="Richter Gedeon Irodaépület" style="width:100%;height:100%;object-fit:cover;animation:heroZoom 8s cubic-bezier(.16,.7,.2,1) both">
     </div>
     <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,17,14,.9) 0%,rgba(15,17,14,.62) 46%,rgba(15,17,14,.24) 100%);pointer-events:none"></div>
     <div style="position:absolute;inset:0;pointer-events:none">
@@ -82,18 +83,6 @@
         <span style="width:8px;height:8px;border-radius:50%;background:#8bc46f;flex:none"></span>
         <div style="line-height:1.3"><div style="color:#fff;font-family:'Titillium Web';font-weight:700;font-size:13px">Richter Központ · Az Év Irodája 2024</div><div style="color:#b7bcb0;font-size:12px">Budapest · Gyömrői út · 17 400 m²</div></div>
       </div>
-    </div>
-  </div>
-
-  <!-- MARQUEE -->
-  <div style="background:#3a6e2c;overflow:hidden;padding:16px 0">
-    <div style="display:flex;width:max-content;animation:marquee 32s linear infinite;font-family:'Titillium Web';font-weight:600;font-size:16px;letter-spacing:2px;color:#c9e2ba">
-      <span style="display:flex;gap:0">
-        <span style="padding:0 26px">PRECIZITÁS</span><span style="color:#8bc46f">·</span><span style="padding:0 26px">MINŐSÉG</span><span style="color:#8bc46f">·</span><span style="padding:0 26px">MEGBÍZHATÓSÁG</span><span style="color:#8bc46f">·</span><span style="padding:0 26px">HATÁRIDŐ</span><span style="color:#8bc46f">·</span><span style="padding:0 26px">PRÉMIUM</span><span style="color:#8bc46f">·</span><span style="padding:0 26px">PARTNERSÉG</span><span style="color:#8bc46f">·</span><span style="padding:0 26px">SZAKÉRTELEM</span><span style="color:#8bc46f">·</span><span style="padding:0 26px">FIT-OUT</span><span style="color:#8bc46f">·</span>
-      </span>
-      <span style="display:flex;gap:0" aria-hidden="true">
-        <span style="padding:0 26px">PRECIZITÁS</span><span style="color:#8bc46f">·</span><span style="padding:0 26px">MINŐSÉG</span><span style="color:#8bc46f">·</span><span style="padding:0 26px">MEGBÍZHATÓSÁG</span><span style="color:#8bc46f">·</span><span style="padding:0 26px">HATÁRIDŐ</span><span style="color:#8bc46f">·</span><span style="padding:0 26px">PRÉMIUM</span><span style="color:#8bc46f">·</span><span style="padding:0 26px">PARTNERSÉG</span><span style="color:#8bc46f">·</span><span style="padding:0 26px">SZAKÉRTELEM</span><span style="color:#8bc46f">·</span><span style="padding:0 26px">FIT-OUT</span><span style="color:#8bc46f">·</span>
-      </span>
     </div>
   </div>
 
