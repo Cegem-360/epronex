@@ -1,0 +1,3 @@
+.thumbnail
+uploads/*.md
+.DS_Store

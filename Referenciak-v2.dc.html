@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<script src="epx-loader.js"></script>
+<noscript><style>#epx-loader,#epx-loader-logo{display:none}</style></noscript>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lenis@1.3.23/dist/lenis.min.js"></script>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Titillium Web',system-ui,sans-serif;color:#1b1d1a;background:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:#3a6e2c;text-decoration:none}
+  a:hover{color:#4c8c3a}
+  h1,h2,h3,h4{font-family:'Titillium Web',system-ui,sans-serif;margin:0;text-transform:uppercase}
+  ::selection{background:#cfe4c2}
+  @keyframes floatUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+  .big-project-view::-webkit-scrollbar{height:0}
+  .big-project-view{scrollbar-width:none}
+  .big-project-view-link:focus-visible{outline:2px solid #4c8c3a;outline-offset:4px}
+</style>
+</helmet>
+
+<div style="min-height:100vh">
+
+  <header style="position:sticky;top:0;z-index:60;background:rgba(255,255,255,.72);backdrop-filter:blur(14px);border-bottom:1px solid rgba(231,232,227,.6)">
+    <div style="max-width:1300px;margin:0 auto;padding:0 40px">
+      <div style="display:flex;justify-content:flex-end;align-items:center;gap:20px;padding-top:10px">
+        <a href="https://www.facebook.com/epronex" target="_blank" rel="noopener" aria-label="Facebook" style="color:#1b1d1a" style-hover="color:#4c8c3a"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M14 8.5V6.8c0-.8.2-1.2 1.4-1.2H17V2.5h-2.6C11.5 2.5 10.4 4 10.4 6.5v2H8.5v3.1h1.9V21.5H14V11.6h2.3l.4-3.1H14z"/></svg></a>
+        <a href="https://www.linkedin.com/company/epronex" target="_blank" rel="noopener" aria-label="LinkedIn" style="color:#1b1d1a" style-hover="color:#4c8c3a"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21H18.6v-5.4c0-1.3-.02-2.96-1.8-2.96-1.8 0-2.08 1.4-2.08 2.86V21H10z"/></svg></a>
+        <a href="https://www.instagram.com/epronex" target="_blank" rel="noopener" aria-label="Instagram" style="color:#1b1d1a" style-hover="color:#4c8c3a"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.86.07 1.17.05 1.97.24 2.67.51.72.28 1.33.66 1.94 1.27.61.61.99 1.22 1.27 1.94.27.7.46 1.5.51 2.67.06 1.26.07 1.66.07 4.86s0 3.6-.07 4.86c-.05 1.17-.24 1.97-.51 2.67a5.4 5.4 0 0 1-1.27 1.94 5.4 5.4 0 0 1-1.94 1.27c-.7.27-1.5.46-2.67.51-1.26.06-1.66.07-4.86.07s-3.6 0-4.86-.07c-1.17-.05-1.97-.24-2.67-.51a5.4 5.4 0 0 1-1.94-1.27 5.4 5.4 0 0 1-1.27-1.94c-.27-.7-.46-1.5-.51-2.67C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.86c.05-1.17.24-1.97.51-2.67.28-.72.66-1.33 1.27-1.94A5.4 5.4 0 0 1 5.99 1.26c.7-.27 1.5-.46 2.67-.51C9.92 2.2 10.32 2.2 12 2.2zm0 1.8c-3.15 0-3.52.01-4.76.07-.9.04-1.38.19-1.7.32-.43.16-.73.36-1.06.68-.32.33-.52.63-.68 1.06-.13.32-.28.8-.32 1.7C3.4 8.48 3.4 8.85 3.4 12s.01 3.52.07 4.76c.04.9.19 1.38.32 1.7.16.43.36.73.68 1.06.33.32.63.52 1.06.68.32.13.8.28 1.7.32 1.24.06 1.61.07 4.76.07s3.52-.01 4.76-.07c.9-.04 1.38-.19 1.7-.32.43-.16.73-.36 1.06-.68.32-.33.52-.63.68-1.06.13-.32.28-.8.32-1.7.06-1.24.07-1.61.07-4.76s-.01-3.52-.07-4.76c-.04-.9-.19-1.38-.32-1.7a2.85 2.85 0 0 0-.68-1.06 2.85 2.85 0 0 0-1.06-.68c-.32-.13-.8-.28-1.7-.32C15.52 4.01 15.15 4 12 4zm0 3.06a4.94 4.94 0 1 1 0 9.88 4.94 4.94 0 0 1 0-9.88zm0 1.8a3.14 3.14 0 1 0 0 6.28 3.14 3.14 0 0 0 0-6.28zm6.28-.36a1.15 1.15 0 1 1-2.3 0 1.15 1.15 0 0 1 2.3 0z"/></svg></a>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;height:78px">
+        <a href="index.html" style="display:flex;align-items:center;flex:0 0 auto">
+          <img src="assets/epronex-logo.svg" alt="Epronex — Az építő erő" style="height:40px;width:194px;display:block">
+        </a>
+        <nav style="display:flex;align-items:center;flex-wrap:wrap;justify-content:flex-end;gap:clamp(16px,2.4vw,40px);min-width:0;font-family:'Titillium Web';font-weight:700;font-size:clamp(14px,1.15vw,17px);letter-spacing:1px">
+          <a href="index.html#epronex" style="color:#141414" style-hover="color:#4c8c3a">EPRONEX</a>
+          <a href="Referenciak.dc.html" style="color:#141414" style-hover="color:#4c8c3a">REFERENCIÁK</a>
+          <a href="Referenciak-v2.dc.html" style="color:#4c8c3a">REF. V2</a>
+          <a href="index.html#tevekenyseg" style="color:#141414" style-hover="color:#4c8c3a">TEVÉKENYSÉGEK</a>
+          <a href="index.html#karrier" style="color:#141414" style-hover="color:#4c8c3a">KARRIER</a>
+          <a href="index.html#kapcsolat" style="color:#141414" style-hover="color:#4c8c3a">KAPCSOLAT</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <div class="projects-container" style="overflow-x:hidden;padding:64px 0 40px">
+    <div class="projects-scaler" style="display:flex;flex-direction:column;align-items:center;min-height:100vh;will-change:transform;transform:scale(0.752);transform-origin:50% 0;user-select:none">
+      <sc-for list="{{ projects }}" as="p" hint-placeholder-count="9">
+        <div class="project-item" data-id="{{ p.id }}" style="position:relative;user-select:none;width:fit-content;padding-left:368px;margin-left:-368px">
+          <div class="big-project-view" style="margin-bottom:38px;width:fit-content;display:flex;flex-wrap:nowrap;align-items:flex-start;gap:64px;overflow-x:visible;will-change:height;transform:translate3d(0,0,0);transition:height .78s cubic-bezier(.45,0,.55,1)">
+
+            <div style="position:relative;display:flex;flex-direction:column;height:100%;flex:0 0 auto">
+              <a href="{{ p.href }}" onClick="{{ p.onOpen }}" class="big-project-view-link" style="display:block;height:100%">
+                <div class="big-project-view-image" style="position:relative;overflow:hidden;cursor:pointer;width:64vh;background:#e7e8e3;aspect-ratio:{{ p.ratio }};will-change:width,height;transform:translate3d(0,0,0);transition:height .78s cubic-bezier(.45,0,.55,1),width .78s cubic-bezier(.45,0,.55,1)">
+                  <img src="{{ p.img }}" alt="{{ p.title }}" loading="{{ p.loading }}" style="height:100%;width:100%;object-fit:cover;display:block">
+                </div>
+              </a>
+
+              <div style="position:absolute;top:0;left:-44px;max-width:324px;transform:translateX(-100%);display:flex;flex-direction:column;align-items:flex-end;text-align:right;background:#fff">
+                <div style="width:50px;height:50px;background:#1b1d1a;display:flex;align-items:center;justify-content:center">
+                  <span style="color:#8bc46f;font-weight:700;font-size:9px;letter-spacing:.3px">{{ p.tag }}</span>
+                </div>
+                <div style="margin-top:24px">
+                  <h3 style="font-size:18px;line-height:20px;font-weight:600;text-transform:none">{{ p.title }}</h3>
+                  <div style="font-size:12px;letter-spacing:.6px;color:#71766e;margin-top:4px">{{ p.meta }}</div>
+                </div>
+                <div class="big-project-view-details" style="display:flex;flex-direction:column;gap:14px;margin-top:22px">
+                  <div>
+                    <div style="font-size:10px;font-weight:700;letter-spacing:1.2px;color:#a2a79c">TIPOLÓGIA</div>
+                    <div style="font-size:13px;margin-top:2px">{{ p.catLabel }}</div>
+                  </div>
+                  <sc-if value="{{ p.badge }}" hint-placeholder-val="{{ true }}">
+                    <div>
+                      <div style="font-size:10px;font-weight:700;letter-spacing:1.2px;color:#a2a79c">ELISMERÉS</div>
+                      <div style="font-size:13px;margin-top:2px;color:#3a6e2c">{{ p.badge }}</div>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ p.href }}" hint-placeholder-val="{{ true }}">
+                    <a href="{{ p.href }}" style="font-size:12px;font-weight:700;letter-spacing:.8px;color:#3a6e2c">TELJES REFERENCIA →</a>
+                  </sc-if>
+                </div>
+              </div>
+            </div>
+
+            <div class="big-project-view-boxes" style="position:absolute;opacity:0;pointer-events:none;left:0;top:0;display:flex;flex-wrap:nowrap;align-items:center;gap:64px;height:100%;will-change:opacity">
+              <sc-for list="{{ p.blocks }}" as="b" hint-placeholder-count="3">
+                <div class="box" style="{{ b.style }}">
+                  <sc-if value="{{ b.isImage }}" hint-placeholder-val="{{ true }}">
+                    <img src="{{ b.img }}" alt="{{ b.alt }}" loading="lazy" style="height:100%;width:auto;object-fit:cover;display:block">
+                  </sc-if>
+                  <sc-if value="{{ b.isText }}" hint-placeholder-val="{{ true }}">
+                    <div>
+                      <div style="font-size:10px;font-weight:700;letter-spacing:1.4px;color:#8bc46f;margin-bottom:10px">{{ b.kicker }}</div>
+                      <p style="margin:0;font-size:14px;line-height:1.7;color:#3a3d38">{{ b.text }}</p>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ b.isQuote }}" hint-placeholder-val="{{ true }}">
+                    <div>
+                      <p style="margin:0;font-size:19px;line-height:1.5;font-weight:600">{{ b.quote }}</p>
+                      <div style="font-size:12px;letter-spacing:.8px;color:#71766e;margin-top:14px">{{ b.by }}</div>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ b.isSpec }}" hint-placeholder-val="{{ true }}">
+                    <div style="display:flex;flex-direction:column;gap:18px">
+                      <div style="border-top:2px solid #8bc46f;padding-top:12px">
+                        <div style="font-size:10px;font-weight:700;letter-spacing:1.2px;color:#a2a79c">{{ b.s1l }}</div>
+                        <div style="font-size:14px;margin-top:3px">{{ b.s1v }}</div>
+                      </div>
+                      <div style="border-top:1px solid #e7e8e3;padding-top:12px">
+                        <div style="font-size:10px;font-weight:700;letter-spacing:1.2px;color:#a2a79c">{{ b.s2l }}</div>
+                        <div style="font-size:14px;margin-top:3px">{{ b.s2v }}</div>
+                      </div>
+                      <div style="border-top:1px solid #e7e8e3;padding-top:12px">
+                        <div style="font-size:10px;font-weight:700;letter-spacing:1.2px;color:#a2a79c">{{ b.s3l }}</div>
+                        <div style="font-size:14px;margin-top:3px">{{ b.s3v }}</div>
+                      </div>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-for>
+              <div style="height:1px;width:70vw;flex:0 0 auto"></div>
+            </div>
+
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="max-width:1240px;margin:60px auto 80px;padding:0 32px">
+    <div style="background:#1b1d1a;border-radius:10px;padding:52px 56px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap">
+      <div>
+        <h2 style="color:#fff;font-size:30px;font-weight:600;letter-spacing:-.3px">Van egy projektje?</h2>
+        <p style="color:#9aa093;font-size:16px;line-height:1.6;margin:12px 0 0;max-width:460px">Egyeztessünk a következő kivitelezésről — az előkészítéstől az átadásig egy kézben.</p>
+      </div>
+      <a href="index.html#kapcsolat" style="background:#4c8c3a;color:#fff;font-family:'Titillium Web';font-weight:700;font-size:14px;letter-spacing:1px;padding:16px 34px;border-radius:5px;display:inline-flex;align-items:center;gap:10px;transition:background .25s" style-hover="background:#5aa843;color:#fff">KAPCSOLATFELVÉTEL
+        <svg width="20" height="12" viewBox="0 0 22 14" fill="none"><path d="M1 7h19M15 2l5 5-5 5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <footer style="background:#1b1d1a;color:#c9ccc4">
+    <div style="max-width:1240px;margin:0 auto;padding:60px 32px 32px;display:grid;grid-template-columns:1.5fr 1fr 1.1fr;gap:44px">
+      <div>
+        <div style="background:#fff;border-radius:10px;padding:16px 20px;display:inline-block;margin-bottom:20px"><img src="assets/epronex-logo.svg" alt="Epronex — Az építő erő" style="height:34px;width:165px;display:block"></div>
+        <p style="margin:0;font-size:14.5px;line-height:1.7;max-width:340px;color:#9aa093">Generálkivitelezés és fit-out prémium minőségben — retail, iroda és ipari projektek megbízható partnereként, 2015 óta.</p>
+      </div>
+      <div>
+        <div style="font-family:'Titillium Web';font-weight:700;font-size:13px;letter-spacing:1.5px;color:#fff;margin-bottom:18px">OLDALAK</div>
+        <div style="display:flex;flex-direction:column;gap:11px;font-size:14.5px">
+          <a href="index.html#epronex" style="color:#c9ccc4" style-hover="color:#8bc46f">A cégről</a>
+          <a href="index.html#tevekenyseg" style="color:#c9ccc4" style-hover="color:#8bc46f">Tevékenységek</a>
+          <a href="Referenciak-v2.dc.html" style="color:#c9ccc4" style-hover="color:#8bc46f">Referenciák</a>
+          <a href="index.html#karrier" style="color:#c9ccc4" style-hover="color:#8bc46f">Karrier</a>
+          <a href="index.html#kapcsolat" style="color:#c9ccc4" style-hover="color:#8bc46f">Kapcsolat</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:'Titillium Web';font-weight:700;font-size:13px;letter-spacing:1.5px;color:#fff;margin-bottom:18px">EPRONEX ÉPÍTŐ ZRT.</div>
+        <div style="display:flex;flex-direction:column;gap:9px;font-size:14.5px;color:#9aa093">
+          <span>2040 Budaörs, Kamaraerdei út 2.</span>
+          <span>Adószám: 25301360-2-13</span>
+          <span>Cégjegyzékszám: 13 10 041514</span>
+          <a href="tel:+3623814819" style="color:#c9ccc4" style-hover="color:#8bc46f">Telefon: +36 23 814 819</a>
+          <a href="mailto:info@epronex.hu" style="color:#c9ccc4" style-hover="color:#8bc46f">info@epronex.hu</a>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid #33362f"><div style="max-width:1240px;margin:0 auto;padding:20px 32px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:#7b8073"><span>© 2026 Epronex Építő Zrt. — Az építő erő</span><a href="Referenciak.dc.html" style="color:#7b8073" style-hover="color:#8bc46f">Rács nézet</a></div></div>
+  </footer>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+function cubicBezier(x1, y1, x2, y2) {
+  const A = (a, b) => 1 - 3 * b + 3 * a;
+  const B = (a, b) => 3 * b - 6 * a;
+  const C = a => 3 * a;
+  const calc = (t, a, b) => ((A(a, b) * t + B(a, b)) * t + C(a)) * t;
+  const slope = (t, a, b) => 3 * A(a, b) * t * t + 2 * B(a, b) * t + C(a);
+  return function (x) {
+    if (x <= 0) return 0;
+    if (x >= 1) return 1;
+    let t = x;
+    for (let i = 0; i < 8; i++) {
+      const s = slope(t, x1, x2);
+      if (s === 0) break;
+      t -= (calc(t, x1, x2) - x) / s;
+    }
+    return calc(t, y1, y2);
+  };
+}
+
+function makeWheelClassifier() {
+  const W = 250, TRACKPAD_HZ = 25, TRACKPAD_MEAN = 50, MOUSE_MEAN = 80;
+  const BIN = 10, STRONG = 0.7, WEAK = 0.55;
+  let samples = [], last = 0;
+  return function (e) {
+    const now = performance.now();
+    const gap = last ? now - last : Infinity;
+    last = now;
+    if (e.ctrlKey) return null;
+    const abs = Math.abs(e.deltaY);
+    if (abs < 1) return null;
+    samples.push({ t: now, abs });
+    while (samples.length && now - samples[0].t > W) samples.shift();
+    const n = samples.length;
+    if (!n) return null;
+    const span = samples[n - 1].t - samples[0].t || 1;
+    const mean = samples.reduce((s, x) => s + x.abs, 0) / n;
+    const bins = new Map();
+    for (const s of samples) {
+      const k = Math.round(s.abs / BIN) * BIN;
+      bins.set(k, (bins.get(k) || 0) + 1);
+    }
+    const top = Math.max.apply(null, Array.from(bins.values()));
+    const stepiness = top / n;
+    const rateHz = (n - 1) * 1000 / span;
+    if (stepiness >= STRONG && mean >= MOUSE_MEAN && rateHz < TRACKPAD_HZ) return 'mouse';
+    if (rateHz >= TRACKPAD_HZ && mean < TRACKPAD_MEAN && stepiness < WEAK) return 'trackpad';
+    if (n < 4) {
+      if (gap < 20 && abs < TRACKPAD_MEAN) return 'trackpad';
+      if (abs >= MOUSE_MEAN) return 'mouse';
+    }
+    if (stepiness >= WEAK && mean >= MOUSE_MEAN) return 'mouse';
+    return mean < TRACKPAD_MEAN ? 'trackpad' : null;
+  };
+}
+
+const EASE_OUT = cubicBezier(.25, .46, .45, .94);
+const EASE_EXPO = cubicBezier(.19, 1, .22, 1);
+const EASE_MID = cubicBezier(.45, 0, .55, 1);
+const REST = 0.752, RANGE = 0.132, VEL_NORM = 44;
+
+const BOX_TEXT = 'flex:0 0 auto;width:290px;align-self:center';
+const BOX_IMG = 'flex:0 0 auto;height:100%;overflow:hidden;background:#e7e8e3';
+const BOX_QUOTE = 'flex:0 0 auto;width:520px;align-self:center';
+const BOX_SPEC = 'flex:0 0 auto;width:290px;align-self:center';
+
+class Component extends DCLogic {
+  state = { active: 'all', opened: null };
+
+  cats() {
+    return [
+      { id: 'all', label: 'ÖSSZES' },
+      { id: 'iroda', label: 'IRODA' },
+      { id: 'retail', label: 'RETAIL' },
+      { id: 'ipari', label: 'IPARI' },
+      { id: 'egeszsegugy', label: 'EGÉSZSÉGÜGY' }
+    ];
+  }
+
+  allProjects() {
+    return [
+      { id:'benu', title:'BENU Magyarország', cat:'iroda', catLabel:'IRODAI FIT-OUT', meta:'Budapest · Haller Gardens · 2021', img:'assets/benu-hero.jpg', href:'Referencia-BENU.dc.html', full:true },
+      { id:'richter', title:'Richter Központ', cat:'iroda', catLabel:'GENERÁLKIVITELEZÉS', meta:'Budapest · 17 400 m²', img:'assets/ref-richter.jpg', badge:'AZ ÉV IRODÁJA 2024' },
+      { id:'computacenter', title:'Computacenter', cat:'iroda', catLabel:'IRODAI FIT-OUT', meta:'Budapest · irodaterület', img:'assets/ref-computacenter.jpg' },
+      { id:'margit', title:'Margit Palace', cat:'iroda', catLabel:'IRODAHÁZ · KÖZÖSSÉGI TÉR', meta:'Budapest · Henger utca · 2017', img:'assets/ref-margit.jpg' },
+      { id:'hungaria', title:'Hungária Center', cat:'iroda', catLabel:'IRODAHÁZ', meta:'Budapest', img:'assets/ref-hungaria.jpg' },
+      { id:'otp', title:'OTP Csúcs', cat:'iroda', catLabel:'KÖZÖSSÉGI TÉR', meta:'Budapest', img:'assets/ref-otpcsucs.jpg' },
+      { id:'trivium', title:'Trivium Packaging BSC', cat:'iroda', catLabel:'IRODAI FIT-OUT', meta:'Budapest', img:'assets/ref-trivium.jpg' },
+      { id:'newyorker', title:'New Yorker', cat:'retail', catLabel:'RETAIL · GENERÁLKIVITELEZÉS', meta:'Országosan · 2015-től', img:'assets/ref-newyorker.jpg' },
+      { id:'kfc', title:'KFC Budaörs', cat:'retail', catLabel:'RETAIL · VENDÉGLÁTÁS', meta:'Budaörs', img:'assets/ref-kfc.jpg' },
+      { id:'hm', title:'H&M', cat:'retail', catLabel:'RETAIL', meta:'Több helyszín', img:'assets/ref-hm.jpg' },
+      { id:'pepco', title:'PEPCO', cat:'retail', catLabel:'RETAIL', meta:'Több helyszín', img:'assets/ref-pepco.jpg' },
+      { id:'icentre', title:'iCentre', cat:'retail', catLabel:'RETAIL · APPLE PREMIUM RESELLER', meta:'Több helyszín', img:'assets/ref-icentre.jpg' },
+      { id:'bav', title:'BÁV Art', cat:'retail', catLabel:'RETAIL · AUKCIÓSHÁZ', meta:'Budapest · Szent István krt.', img:'assets/ref-bav.jpg' },
+      { id:'gubacsi', title:'Gubacsi Logisztikai Park', cat:'ipari', catLabel:'IPAR · LOGISZTIKA', meta:'Budapest · 6 790 m²', img:'assets/ref-gubacsi.jpg' },
+      { id:'egis', title:'EGIS', cat:'ipari', catLabel:'IPARI · GÉPÉSZET', meta:'Budapest', img:'assets/ref-egis.jpg' },
+      { id:'medicontur', title:'Medicontur', cat:'ipari', catLabel:'IPARI · TECHNOLÓGIA', meta:'Zsámbék', img:'assets/ref-medicontur.jpg' },
+      { id:'medicover', title:'Medicover Eiffel Klinika', cat:'egeszsegugy', catLabel:'EGÉSZSÉGÜGY', meta:'Budapest · Teréz krt. · 2 400 m²', img:'assets/ref-medicover.jpg' }
+    ];
+  }
+
+  _blocks(p) {
+    const spec = {
+      isSpec: true, style: BOX_SPEC,
+      s1l: 'TIPOLÓGIA', s1v: p.catLabel,
+      s2l: 'HELYSZÍN', s2v: p.meta,
+      s3l: 'STÁTUSZ', s3v: p.badge ? 'Átadva · ' + p.badge : 'Átadva'
+    };
+    if (p.full) {
+      return [
+        { isText: true, style: BOX_TEXT, kicker: 'A PROJEKT', text: 'A BENU Magyarország központi irodája a Haller Gardens épületében kapott helyet. A teljes bérlői kialakítást — gépészet, villamos hálózat, belsőépítészet és bútorozás — egy kézben, működő vállalati környezetre tervezett ütemezésben végeztük.' },
+        { isImage: true, style: BOX_IMG, img: 'assets/benu-g1.jpg', alt: 'BENU iroda' },
+        { isImage: true, style: BOX_IMG, img: 'assets/benu-g2.jpg', alt: 'BENU iroda' },
+        spec,
+        { isImage: true, style: BOX_IMG, img: 'assets/benu-g3.jpg', alt: 'BENU iroda' },
+        { isQuote: true, style: BOX_QUOTE, quote: '„Az ütemterv minden mérföldkövét tartották, a végeredmény pedig a tervezői elképzelést pontosan követi."', by: 'MEGBÍZÓI VISSZAJELZÉS' },
+        { isImage: true, style: BOX_IMG, img: 'assets/benu-g4.jpg', alt: 'BENU iroda' },
+        { isText: true, style: BOX_TEXT, kicker: 'MEGVALÓSÍTÁS', text: 'Nyitott munkaterek, tárgyalók, közösségi konyha és fókuszszobák — akusztikai és világítási megoldásokkal, a márka arculatához illeszkedő anyaghasználattal.' },
+        { isImage: true, style: BOX_IMG, img: 'assets/benu-g5.jpg', alt: 'BENU iroda' }
+      ];
+    }
+    return [
+      spec,
+      { isText: true, style: BOX_TEXT, kicker: 'RÖVIDEN', text: p.title + ' — ' + p.catLabel.toLowerCase() + ' projekt ' + p.meta.split(' · ')[0] + '. A kivitelezést előkészítéstől átadásig generálkivitelezőként vittük végig, a megbízó működésének fenntartása mellett.' }
+    ];
+  }
+
+  renderVals() {
+    const active = this.state.active;
+    const filters = this.cats().map(cat => {
+      const on = cat.id === active;
+      return {
+        label: cat.label,
+        onClick: () => { this._resetAllRows(); this.setState({ active: cat.id, opened: null }); },
+        style: "font-family:'Titillium Web',sans-serif;font-weight:700;font-size:13px;letter-spacing:.6px;padding:11px 22px;border-radius:100px;cursor:pointer;transition:all .2s;border:1px solid " +
+          (on ? '#4c8c3a' : '#d8dad3') + ';background:' + (on ? '#4c8c3a' : '#fff') + ';color:' + (on ? '#fff' : '#3a3d38')
+      };
+    });
+
+    const list = this.allProjects().filter(p => active === 'all' || p.cat === active);
+    const projects = list.map((p, i) => ({
+      id: p.id, title: p.title, catLabel: p.catLabel, meta: p.meta, img: p.img,
+      badge: p.badge || '', href: p.href || '', ratio: p.ratio || '3 / 2',
+      loading: i < 3 ? 'eager' : 'lazy',
+      tag: { iroda: 'IRODA', retail: 'RETAIL', ipari: 'IPAR', egeszsegugy: 'EÜ' }[p.cat] || '',
+      blocks: this._blocks(p),
+      onOpen: (ev) => this._openProject(p, ev)
+    }));
+
+    const n = list.length;
+    return { filters, projects, countLabel: n + ' projekt' + (active === 'all' ? '' : ' ebben a kategóriában') };
+  }
+
+  componentDidMount() {
+    this._scale = REST;
+    this._tween = null;
+    this._idle = null;
+    this._prevVel = 0;
+    this._input = null;
+    this._classify = makeWheelClassifier();
+
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this._enabled = matchMedia('(min-width: 1025px)').matches && !reduced && typeof window.Lenis === 'function';
+
+    this._bindRefs();
+    if (!this._enabled) { if (this._scaler) this._scaler.style.transform = 'scale(1)'; }
+
+    this._onKey = e => {
+      if (e.key !== 'Escape' || !this.state.opened) return;
+      this._closeProject(this.state.opened);
+      this.setState({ opened: null });
+      history.replaceState(null, '', location.pathname);
+    };
+    document.addEventListener('keydown', this._onKey);
+    if (!this._enabled) return;
+
+    this._lenis = new Lenis({
+      duration: .72, smoothWheel: true, orientation: 'vertical',
+      easing: EASE_OUT, wheelMultiplier: 2.6, touchMultiplier: 2.6
+    });
+    const raf = t => { this._lenis.raf(t); this._rafId = requestAnimationFrame(raf); };
+    this._rafId = requestAnimationFrame(raf);
+
+    this._onWheel = e => { const t = this._classify(e); if (t) this._input = t; };
+    window.addEventListener('wheel', this._onWheel, { passive: true, capture: true });
+
+    this._lenis.on('scroll', ({ velocity, userData }) => {
+      if (!this._scaler) return;
+      this._applyOrigin();
+
+      if (userData && userData.projectOpened) {
+        clearTimeout(this._idle);
+        if (this._tween) this._tween.stop();
+        this._tween = this._tweenScale(1, 1.8, EASE_OUT);
+        return;
+      }
+
+      if (this._openMode) return;
+
+      const v = Math.abs(velocity);
+      clearTimeout(this._idle);
+
+      const n = Math.min(v / VEL_NORM, 1);
+      let dur = 0.6;
+      if (this._input === 'mouse') {
+        if (this._prevVel > v && v < 65) dur = 1.8;
+        this._prevVel = v;
+      }
+
+      if (this._tween) this._tween.stop();
+      this._tween = this._tweenScale(REST - RANGE * n, dur, EASE_OUT);
+
+      if (this._input !== 'mouse') {
+        this._idle = setTimeout(() => {
+          this._input = null;
+          if (this._tween) this._tween.stop();
+          this._tween = this._tweenScale(REST, 1.2, EASE_EXPO);
+        }, 400);
+      }
+    });
+  }
+
+  componentDidUpdate() {
+    this._bindRefs();
+    if (this.state.opened && !document.querySelector('.project-item[data-id="' + this.state.opened + '"]')) {
+      this.setState({ opened: null });
+    }
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this._idle);
+    if (this._tween) this._tween.stop();
+    if (this._rafId) cancelAnimationFrame(this._rafId);
+    if (this._onWheel) window.removeEventListener('wheel', this._onWheel, { capture: true });
+    if (this._onKey) document.removeEventListener('keydown', this._onKey);
+    if (this._lenis) this._lenis.destroy();
+  }
+
+  _bindRefs() {
+    this._scaler = document.querySelector('.projects-scaler');
+    if (!this._scaler) return;
+    const r = this._scaler.getBoundingClientRect();
+    this._scalerTop = r.top + window.scrollY;
+    this._H = this._scaler.offsetHeight;
+    this._allow = Math.round(innerHeight * 0.5);
+    this._container = this._scaler.parentElement;
+    this._sizeContainer();
+  }
+
+  _sizeContainer() {
+    if (!this._enabled || !this._container) return;
+    const s = this._openMode ? 1 : REST;
+    this._container.style.height = Math.round(this._H * s + this._allow) + 'px';
+  }
+
+  // Origin travels proportionally through the list, capped so the scaled block
+  // always stays inside the container — viewport-pinned origin drifted a full
+  // 25% of the list height out of the layout and left a hole above the CTA.
+  _applyOrigin() {
+    const p = Math.max(0, Math.min((window.scrollY + innerHeight * 0.5 - this._scalerTop) / this._H, 1));
+    this._scaler.style.transformOrigin = '50% ' + (p * this._allow / (1 - REST)) + 'px';
+  }
+
+  _tweenScale(to, durSec, ease) {
+    const from = this._scale, t0 = performance.now(), ms = durSec * 1000;
+    let id, dead = false;
+    const step = now => {
+      if (dead || !this._scaler) return;
+      const p = Math.min((now - t0) / ms, 1);
+      this._scale = from + (to - from) * ease(p);
+      this._scaler.style.transform = 'scale(' + this._scale + ')';
+      if (p < 1) id = requestAnimationFrame(step);
+    };
+    id = requestAnimationFrame(step);
+    return { stop() { dead = true; cancelAnimationFrame(id); } };
+  }
+
+  _resetAllRows() {
+    if (this._enabled) {
+      this._openMode = false;
+      clearTimeout(this._idle);
+      if (this._tween) this._tween.stop();
+      this._tween = this._tweenScale(REST, .5, EASE_EXPO);
+    }
+    document.querySelectorAll('.project-item').forEach(el => {
+      clearTimeout(el._closeT1);
+      clearTimeout(el._closeT2);
+      delete el._collapsedH;
+      const view = el.querySelector('.big-project-view');
+      const img = el.querySelector('.big-project-view-image');
+      const boxes = el.querySelector('.big-project-view-boxes');
+      const details = el.querySelector('.big-project-view-details');
+      if (el._spacer) { el._spacer.remove(); el._spacer = null; }
+      el.style.paddingLeft = '368px';
+      el.style.marginLeft = '-368px';
+      if (view) {
+        view.scrollLeft = 0;
+        view.style.transition = 'none';
+        view.style.width = 'fit-content';
+        view.style.height = '';
+        view.style.overflowX = 'visible';
+        view.style.justifyContent = '';
+        requestAnimationFrame(() => { view.style.transition = 'height .78s cubic-bezier(.45,0,.55,1)'; });
+      }
+      if (img) { img.style.width = '64vh'; img.style.height = ''; }
+      if (boxes) { boxes.style.transition = 'none'; boxes.style.position = 'absolute'; boxes.style.opacity = '0'; boxes.style.pointerEvents = 'none'; }
+    });
+  }
+
+  _collapsedHeight(el) {
+    if (!el._collapsedH) {
+      const h = el.querySelector('.big-project-view').offsetHeight;
+      if (h) el._collapsedH = h;
+    }
+    return el._collapsedH;
+  }
+
+  _closeProject(id) {
+    const el = document.querySelector('.project-item[data-id="' + id + '"]');
+    if (!el) return 0;
+
+    const view = el.querySelector('.big-project-view');
+    const img = el.querySelector('.big-project-view-image');
+    const boxes = el.querySelector('.big-project-view-boxes');
+    const details = el.querySelector('.big-project-view-details');
+    const closed = this._collapsedHeight(el);
+    const delta = Math.max(view.offsetHeight - closed, 0);
+
+    if (boxes) { boxes.style.transition = 'opacity .18s linear'; boxes.style.opacity = '0'; boxes.style.pointerEvents = 'none'; }
+    clearTimeout(el._closeT1);
+    clearTimeout(el._closeT2);
+
+    el._closeT1 = setTimeout(() => {
+      if (boxes) boxes.style.position = 'absolute';
+      view.scrollLeft = 0;
+      view.style.overflowX = 'visible';
+      if (el._spacer) { el._spacer.remove(); el._spacer = null; }
+      el.style.paddingLeft = '368px';
+      el.style.marginLeft = '-368px';
+      view.style.width = 'fit-content';
+      view.style.height = closed + 'px';
+      img.style.height = '';
+      img.style.width = '64vh';
+    }, 180);
+
+    el._closeT2 = setTimeout(() => { view.style.height = ''; }, 980);
+
+    if (this._enabled && this.state.opened === id) {
+      this._openMode = false;
+      clearTimeout(this._idle);
+      if (this._tween) this._tween.stop();
+      this._tween = this._tweenScale(REST, 1.2, EASE_EXPO);
+      setTimeout(() => { this._H = this._scaler.offsetHeight; this._sizeContainer(); }, 1000);
+    }
+
+    return delta;
+  }
+
+  _openProject(project, ev) {
+    ev.preventDefault();
+    ev.stopPropagation();
+
+    const el = document.querySelector('.project-item[data-id="' + project.id + '"]');
+    if (!el) return;
+
+    const prev = this.state.opened;
+
+    if (prev === project.id) {
+      this._closeProject(prev);
+      this.setState({ opened: null });
+      history.replaceState(null, '', location.pathname);
+      return;
+    }
+
+    this._collapsedHeight(el);
+
+    let shift = 0;
+    if (prev) {
+      const prevEl = document.querySelector('.project-item[data-id="' + prev + '"]');
+      const delta = this._closeProject(prev);
+      if (prevEl && prevEl.offsetTop < el.offsetTop) shift = delta;
+    }
+
+    history.pushState(null, '', '#ref-' + project.id);
+    this.setState({ opened: project.id });
+
+    const wide = matchMedia('(min-width: 768px)').matches;
+    const view = el.querySelector('.big-project-view');
+    const img = el.querySelector('.big-project-view-image');
+    const details = el.querySelector('.big-project-view-details');
+
+    setTimeout(() => {
+      const boxes = el.querySelector('.big-project-view-boxes');
+
+      setTimeout(() => {
+        let y = el.offsetTop - shift + (wide ? 0.76 * innerHeight / 2 : view.offsetHeight / 2) - innerHeight / 2 + (wide ? 60 : 38);
+        if (y < 0) y = 1;
+        if (this._lenis) this._lenis.scrollTo(y, { duration: .7, easing: EASE_MID, userData: { projectOpened: true } });
+        else window.scrollTo({ top: y, behavior: 'smooth' });
+      }, 10);
+
+      if (this._enabled) {
+        this._openMode = true;
+        this._sizeContainer();
+        clearTimeout(this._idle);
+        if (this._tween) this._tween.stop();
+        this._tween = this._tweenScale(1, 1.8, EASE_OUT);
+      }
+
+      setTimeout(() => {
+        view.style.justifyContent = 'flex-start';
+        view.style.overflowX = 'scroll';
+        if (!wide) return;
+        if (!el._spacer) {
+          const sp = document.createElement('div');
+          sp.setAttribute('data-lead-spacer', '');
+          sp.style.cssText = 'flex:0 0 auto;width:368px;height:1px';
+          view.insertBefore(sp, view.firstChild);
+          el._spacer = sp;
+        }
+        el.style.paddingLeft = '0';
+        el.style.marginLeft = '0';
+        view.style.width = '100vw';
+        setTimeout(() => { this._H = this._scaler.offsetHeight; this._sizeContainer(); }, 850);
+        view.style.height = '76vh';
+        img.style.height = '100%';
+        img.style.width = 'fit-content';
+      }, 5);
+
+      if (boxes) {
+        boxes.style.position = 'absolute';
+        boxes.style.opacity = '0';
+        setTimeout(() => {
+          boxes.style.position = 'relative';
+          boxes.style.transition = 'opacity .4s linear';
+          boxes.style.opacity = '1';
+          boxes.style.pointerEvents = 'auto';
+        }, 1170);
+      }
+    }, 80);
+  }
+}
+
+</script>
+</body>
+</html>
