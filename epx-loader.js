@@ -64,7 +64,13 @@
       if (!to.height) return requestAnimationFrame(wait);
       var dx = (to.left + to.width / 2) - (from.left + from.width / 2);
       var dy = (to.top + to.height / 2) - (from.top + from.height / 2);
-      var k = to.height / logo.querySelector('svg').offsetHeight;
+      /* Untransformed height of the loader mark. getComputedStyle is the only reliable
+         source here: SVGSVGElement has no offsetHeight (it is not an HTMLElement, so the
+         property is undefined), and getBoundingClientRect would include the scale(1.2)
+         from the stylesheet. Either mistake yields a NaN or wrong k. */
+      var baseH = parseFloat(getComputedStyle(logo.querySelector('svg')).height);
+      var k = to.height / baseH;
+      if (!isFinite(k) || k <= 0) k = 1;   /* never emit scale(NaN): it voids the whole transform */
 
       target.style.opacity = '0';
       logo.style.transition = 'transform ' + TRAVEL + 'ms ' + EASE_MOVE;
