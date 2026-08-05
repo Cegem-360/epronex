@@ -73,7 +73,12 @@
       if (!isFinite(k) || k <= 0) k = 1;   /* never emit scale(NaN): it voids the whole transform */
 
       target.style.opacity = '0';
-      logo.style.transition = 'transform ' + TRAVEL + 'ms ' + EASE_MOVE;
+      /* Declare BOTH transitions up front and never reassign style.transition again.
+         Overwriting it mid-flight drops `transform` from the transition list, which cancels
+         the running transition — the transform then snaps straight to its target and the logo
+         visibly teleports the last stretch into the header slot. */
+      logo.style.transition = 'transform ' + TRAVEL + 'ms ' + EASE_MOVE +
+                              ', opacity ' + FADE + 'ms linear';
       logo.style.transform = 'translate(-50%,-50%) translate(' + dx + 'px,' + dy + 'px) scale(' + k + ')';
 
       setTimeout(function () {
@@ -82,8 +87,7 @@
       }, CURTAIN_AT);
 
       setTimeout(function () {
-        logo.style.transition = 'opacity ' + FADE + 'ms linear';
-        logo.style.opacity = '0';
+        logo.style.opacity = '0';        /* transition already declared above — do not touch it here */
         target.style.transition = 'opacity 500ms ease';
         target.style.opacity = '1';
       }, TRAVEL - FADE);
