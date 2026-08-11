@@ -3,9 +3,21 @@
   var MIN_HOLD = 1100, TRAVEL = 1100, CURTAIN_AT = 450, CURTAIN = 800, FADE = 260;
   var EASE_MOVE = 'cubic-bezier(.45,0,.55,1)', EASE_LIFT = 'cubic-bezier(.33,1,.68,1)';
 
+  /* How often the intro replays. Change this one constant to dial it back.
+       'always'  - every page load (current: client review, maximum impact)
+       'session' - once per browser session
+       'daily'   - once per calendar day, per visitor                        */
+  var REPLAY = 'always';
+
   try {
-    if (sessionStorage.getItem('epx-intro') === '1') return;
-    sessionStorage.setItem('epx-intro', '1');
+    if (REPLAY === 'session') {
+      if (sessionStorage.getItem('epx-intro') === '1') return;
+      sessionStorage.setItem('epx-intro', '1');
+    } else if (REPLAY === 'daily') {
+      var today = new Date().toISOString().slice(0, 10);
+      if (localStorage.getItem('epx-intro') === today) return;
+      localStorage.setItem('epx-intro', today);
+    }
   } catch (e) {}
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
