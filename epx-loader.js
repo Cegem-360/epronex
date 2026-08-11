@@ -7,6 +7,14 @@
        'always'  - every page load (current: client review, maximum impact)
        'session' - once per browser session
        'daily'   - once per calendar day, per visitor                        */
+  /* The intro belongs to the homepage only. Referenciák / Ref. V2 / BENU load
+     straight in: these are separate HTML pages, so a curtain on every internal
+     navigation is a toll rather than an introduction. The script tag is also
+     omitted from those pages — this guard is the safety net if one is added. */
+  var HOME_ONLY = true;
+  var path = location.pathname.replace(/\/+$/, '');
+  if (HOME_ONLY && !(path === '' || /\/index\.html?$/i.test(path))) return;
+
   var REPLAY = 'always';
 
   try {
