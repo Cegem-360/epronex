@@ -57,7 +57,18 @@
     document.body.insertBefore(curtain, document.body.firstChild);
     document.body.insertBefore(logo, document.body.firstChild);
     html.classList.add('epx-loading');
-    requestAnimationFrame(function () { html.classList.add('epx-building'); });
+    /* Force the pre-animation state (opacity:0, translated/squashed paths) to be computed
+       and committed BEFORE epx-building lands. Without this the browser coalesces the two
+       states into one style pass, there is no "before" to interpolate from, and the whole
+       staggered build-up is skipped silently — the logo just appears fully formed. A single
+       rAF is not enough: rAF callbacks run before paint, so both states can still share a
+       recalculation. Reading a layout/computed value forces the flush. */
+    void logo.getBoundingClientRect().width;
+    var firstPath = logo.querySelector('svg path');
+    if (firstPath) void getComputedStyle(firstPath).opacity;
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () { html.classList.add('epx-building'); });
+    });
     run();
   }
 
