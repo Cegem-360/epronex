@@ -284,7 +284,10 @@
     overflow-x: visible !important;
   }
   .big-project-view-boxes {
-    position: static !important;
+    /* NOTE: never force `position` here. The page's JS keeps the blocks
+       absolutely positioned while a row is closed so they take no space, and
+       switches to relative on open. Forcing static put every closed row's
+       hidden content back into the flow — a screen of white per project. */
     flex-direction: column !important;
     width: 100% !important;
     gap: 22px !important;
