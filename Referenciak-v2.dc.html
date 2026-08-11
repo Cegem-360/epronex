@@ -516,6 +516,13 @@ class Component extends DCLogic {
     const delta = Math.max(view.offsetHeight - closed, 0);
 
     if (boxes) { boxes.style.transition = 'opacity .18s linear'; boxes.style.opacity = '0'; boxes.style.pointerEvents = 'none'; }
+    /* An open that is still in flight will otherwise re-expand this row after we
+       have collapsed it: its deferred steps run up to ~1.25s after the click, and
+       the last one puts boxes back to position:relative/opacity:1. Cancel them. */
+    clearTimeout(el._openT0);
+    clearTimeout(el._openT1);
+    clearTimeout(el._openT2);
+    clearTimeout(el._openT3);
     clearTimeout(el._closeT1);
     clearTimeout(el._closeT2);
 
@@ -578,10 +585,10 @@ class Component extends DCLogic {
     const img = el.querySelector('.big-project-view-image');
     const details = el.querySelector('.big-project-view-details');
 
-    setTimeout(() => {
+    el._openT0 = setTimeout(() => {
       const boxes = el.querySelector('.big-project-view-boxes');
 
-      setTimeout(() => {
+      el._openT1 = setTimeout(() => {
         let y = el.offsetTop - shift + (wide ? 0.76 * innerHeight / 2 : view.offsetHeight / 2) - innerHeight / 2 + (wide ? 60 : 38);
         if (y < 0) y = 1;
         if (this._lenis) this._lenis.scrollTo(y, { duration: .7, easing: EASE_MID, userData: { projectOpened: true } });
@@ -610,7 +617,7 @@ class Component extends DCLogic {
         el.style.paddingLeft = '0';
         el.style.marginLeft = '0';
         view.style.width = '100vw';
-        setTimeout(() => { this._H = this._scaler.offsetHeight; this._sizeContainer(); }, 850);
+        el._openT2 = setTimeout(() => { this._H = this._scaler.offsetHeight; this._sizeContainer(); }, 850);
         view.style.height = '76vh';
         img.style.height = '100%';
         img.style.width = 'fit-content';
@@ -619,7 +626,9 @@ class Component extends DCLogic {
       if (boxes) {
         boxes.style.position = 'absolute';
         boxes.style.opacity = '0';
-        setTimeout(() => {
+        el._openT3 = setTimeout(() => {
+          /* belt and braces: never reveal blocks for a row that is no longer open */
+          if (this.state.opened !== project.id) return;
           boxes.style.position = 'relative';
           boxes.style.transition = 'opacity .4s linear';
           boxes.style.opacity = '1';
