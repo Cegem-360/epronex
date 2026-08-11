@@ -1,0 +1,275 @@
+/* ===========================================================================
+   Epronex — responsive layer
+   ---------------------------------------------------------------------------
+   The pages carry their desktop layout in inline style attributes, so layout is
+   targeted here with [style*="..."] attribute selectors and !important. Every
+   rule is breakpoint-gated: nothing here can affect the desktop rendering.
+
+   IMPORTANT — selector format
+   The pages render through the DC runtime (React), which re-serialises every
+   inline style. The source file says
+       grid-template-columns:repeat(3,1fr)
+   but the DOM ends up with
+       grid-template-columns: repeat(3, 1fr)
+   (space after every colon AND comma, and `0` becomes `0px`). Selectors must
+   match the RENDERED form. Both forms are listed where it is cheap to do so, so
+   anything rendered outside the React tree is still covered.
+
+   Breakpoints chosen to match Tailwind's defaults, so the TALL rebuild is a
+   mechanical translation:
+     <= 1023px   below lg — nav collapses to a hamburger, 3+ col grids drop to 2
+     <=  767px   below md — single column, type scale down, mobile logo
+     <=  639px   below sm — tighter padding
+   =========================================================================== */
+
+/* ---------- 1. containers ------------------------------------------------ */
+
+@media (max-width: 767px) {
+  [style*="max-width: 1240px"], [style*="max-width:1240px"],
+  [style*="max-width: 1300px"], [style*="max-width:1300px"],
+  [style*="max-width: 1180px"], [style*="max-width:1180px"] {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  /* nothing may exceed the viewport */
+  form, table, iframe, video, pre { max-width: 100% !important; }
+  form { width: 100% !important; }
+}
+@media (max-width: 639px) {
+  [style*="max-width: 1240px"], [style*="max-width:1240px"],
+  [style*="max-width: 1300px"], [style*="max-width:1300px"],
+  [style*="max-width: 1180px"], [style*="max-width:1180px"] {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+}
+
+/* ---------- 2. grids ----------------------------------------------------- */
+
+@media (max-width: 1023px) {
+  [style*="grid-template-columns: repeat(5, 1fr)"],
+  [style*="grid-template-columns: repeat(4, 1fr)"],
+  [style*="grid-template-columns: repeat(3, 1fr)"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  [style*="grid-template-columns: 1.5fr 1fr 1.1fr"],
+  [style*="grid-template-columns: 1.4fr 1fr 1fr"],
+  [style*="grid-template-columns: 1fr 380px"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+@media (max-width: 767px) {
+  [style*="grid-template-columns: repeat(5, 1fr)"],
+  [style*="grid-template-columns: repeat(4, 1fr)"],
+  [style*="grid-template-columns: repeat(3, 1fr)"],
+  [style*="grid-template-columns: repeat(2, minmax(0px, 300px))"],
+  [style*="grid-template-columns: 1fr 1fr"],
+  [style*="grid-template-columns: 1fr 1.1fr"],
+  [style*="grid-template-columns: 1.5fr 1fr 1.1fr"],
+  [style*="grid-template-columns: 1.4fr 1fr 1fr"],
+  [style*="grid-template-columns: 1fr 380px"] {
+    grid-template-columns: 1fr !important;
+  }
+  [style*="gap: 56px"] { gap: 30px !important; }
+  [style*="gap: 44px"] { gap: 26px !important; }
+  [style*="gap: 40px"] { gap: 24px !important; }
+}
+
+/* ---------- 3. type scale ------------------------------------------------ */
+
+@media (max-width: 767px) {
+  [style*="font-size: 70px"] { font-size: 34px !important; letter-spacing: -.4px !important; line-height: 1.08 !important; }
+  [style*="font-size: 62px"] { font-size: 32px !important; letter-spacing: -.4px !important; line-height: 1.08 !important; }
+  [style*="font-size: 52px"] { font-size: 29px !important; letter-spacing: -.3px !important; line-height: 1.1  !important; }
+  [style*="font-size: 46px"] { font-size: 27px !important; line-height: 1.12 !important; }
+  [style*="font-size: 44px"] { font-size: 26px !important; line-height: 1.15 !important; }
+  [style*="font-size: 40px"] { font-size: 24px !important; line-height: 1.15 !important; }
+  [style*="font-size: 34px"] { font-size: 22px !important; }
+  [style*="font-size: 30px"] { font-size: 21px !important; }
+  [style*="font-size: 28px"] { font-size: 20px !important; }
+}
+
+/* ---------- 4. heroes and section rhythm --------------------------------- */
+
+@media (max-width: 767px) {
+  [style*="height: 720px"] { height: auto !important; min-height: 86vh !important; }
+  [style*="height: 420px"] { height: auto !important; min-height: 52vh !important; }
+
+  [style*="max-width: 760px"],
+  [style*="max-width: 720px"],
+  [style*="max-width: 560px"] { max-width: 100% !important; }
+
+  [style*="padding: 104px 32px 90px"] { padding: 56px 20px 48px !important; }
+  [style*="padding: 104px 32px"]      { padding: 56px 20px !important; }
+  [style*="padding: 100px 32px"]      { padding: 56px 20px !important; }
+  [style*="padding: 60px 32px 32px"]  { padding: 44px 20px 28px !important; }
+  [style*="padding: 52px 56px"]       { padding: 30px 22px !important; }
+  [style*="padding: 0px 32px"]        { padding-left: 20px !important; padding-right: 20px !important; }
+}
+
+/* ---------- 5. flex rows that must wrap ---------------------------------- */
+
+@media (max-width: 767px) {
+  [style*="display: flex"][style*="justify-content: space-between"] { flex-wrap: wrap; }
+}
+
+/* ---------- 6. header + hamburger nav ------------------------------------ */
+/* Button, panel and scrim are created at runtime by assets/nav.js and appended
+   to <body> — NOT into the header, which the DC runtime re-renders and would
+   wipe. The button is fixed-positioned to sit in the header's right edge.     */
+
+.epx-burger { display: none; }
+
+@media (max-width: 1023px) {
+  header nav { display: none !important; }
+  header [style*="padding: 0px 40px"] { padding-left: 20px !important; padding-right: 20px !important; }
+
+  .epx-burger {
+    position: fixed;
+    top: 46px;
+    right: 16px;
+    z-index: 80;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  /* stepped bars — a nod to the stepped skyline in the mark */
+  .epx-burger span {
+    display: block;
+    height: 2.5px;
+    background: #1b1d1a;
+    border-radius: 2px;
+    transition: width .25s ease, transform .25s ease, opacity .18s ease;
+  }
+  .epx-burger span:nth-child(1) { width: 28px; }
+  .epx-burger span:nth-child(2) { width: 20px; }
+  .epx-burger span:nth-child(3) { width: 24px; }
+
+  .epx-burger[aria-expanded="true"] span:nth-child(1) { width: 28px; transform: translateY(7.5px) rotate(45deg); }
+  .epx-burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .epx-burger[aria-expanded="true"] span:nth-child(3) { width: 28px; transform: translateY(-7.5px) rotate(-45deg); }
+
+  .epx-nav-panel {
+    position: fixed;
+    inset: 0 0 0 auto;
+    width: min(86vw, 360px);
+    background: #fff;
+    z-index: 75;
+    padding: 96px 28px 32px;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform .38s cubic-bezier(.22, 1, .36, 1);
+    box-shadow: -18px 0 48px rgba(27, 29, 26, .16);
+    overflow-y: auto;
+  }
+  .epx-nav-panel.open { transform: none; }
+
+  .epx-nav-panel a {
+    font-family: 'Titillium Web', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: 1px;
+    color: #141414;
+    text-decoration: none;
+    padding: 15px 0;
+    border-bottom: 1px solid #e7e8e3;
+  }
+  .epx-nav-panel a:last-of-type { border-bottom: 0; }
+
+  .epx-nav-scrim {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 17, 14, .42);
+    z-index: 70;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .32s ease;
+  }
+  .epx-nav-scrim.open { opacity: 1; pointer-events: auto; }
+
+  html.epx-nav-open, html.epx-nav-open body { overflow: hidden; }
+}
+
+@media (min-width: 1024px) {
+  .epx-nav-panel, .epx-nav-scrim, .epx-burger { display: none !important; }
+}
+
+/* ---------- 7. footer ---------------------------------------------------- */
+
+@media (max-width: 767px) {
+  footer [style*="display: flex"][style*="justify-content: space-between"] {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
+
+/* ---------- 8. reduced motion -------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .epx-nav-panel, .epx-nav-scrim, .epx-burger span { transition: none !important; }
+}
+
+/* ---------- 9. page-specific: Referencia-BENU ---------------------------- */
+
+/* These cards carry 96px of horizontal padding, which cannot shrink inside a
+   grid track — so they must be relaxed from the lg breakpoint down, not md. */
+@media (max-width: 1023px) {
+  [style*="padding: 56px 48px"] { padding: 36px 26px !important; }
+  [style*="padding: 48px 48px"] { padding: 32px 26px !important; }
+  [style*="padding: 44px 48px"] { padding: 30px 26px !important; }
+  /* grid/flex children default to min-width:auto and refuse to shrink */
+  [style*="display: grid"] > *, [style*="display: flex"] > * { min-width: 0; }
+}
+@media (max-width: 767px) {
+  [style*="padding: 56px 48px"] { padding: 30px 22px !important; }
+  [style*="padding: 48px 48px"] { padding: 28px 22px !important; }
+  [style*="padding: 44px 48px"] { padding: 26px 22px !important; }
+  [style*="gap: 24px"][style*="align-items: flex-start"] { flex-wrap: wrap; }
+}
+
+/* ---------- 10. page-specific: Referenciak-v2 (scroll-zoom list) --------- */
+/* Desktop puts the metadata in a column to the LEFT of the photo, absolutely
+   positioned and pulled out with a negative margin. On a phone that lands
+   off-screen, so the row stacks instead: photo full-bleed, metadata beneath.
+   The scroll-zoom itself is already disabled below 1025px by the page's JS.  */
+
+@media (max-width: 767px) {
+  .projects-scaler { transform: none !important; }
+
+  .project-item {
+    width: 100% !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+  }
+  .big-project-view {
+    width: 100% !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    margin-bottom: 30px !important;
+  }
+  .big-project-view > div:first-child { width: 100% !important; flex: 1 1 auto !important; }
+  .big-project-view-link  { width: 100% !important; }
+  .big-project-view-image { width: 100% !important; }
+
+  /* metadata: out of the absolute gutter, under the photo, left-aligned */
+  .big-project-view-link + div {
+    position: static !important;
+    transform: none !important;
+    max-width: 100% !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    padding-top: 14px !important;
+  }
+}
