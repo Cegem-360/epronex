@@ -263,13 +263,42 @@
   .big-project-view-link  { width: 100% !important; }
   .big-project-view-image { width: 100% !important; }
 
-  /* metadata: out of the absolute gutter, under the photo, left-aligned */
+  /* metadata: out of the absolute gutter, under the photo, left-aligned.
+     The photo stays full-bleed; only the text gets the page gutter back. */
   .big-project-view-link + div {
     position: static !important;
     transform: none !important;
     max-width: 100% !important;
     align-items: flex-start !important;
     text-align: left !important;
-    padding-top: 14px !important;
+    padding: 14px 20px 0 !important;
   }
+
+  /* Opened project strip: BOX_QUOTE is a fixed 520px, which runs off a phone
+     screen. The strip scrolls horizontally, so this never registered as
+     document overflow — but a line of text you have to scroll to finish is
+     unreadable. Cap the text blocks to the viewport; images keep their
+     height-driven width, since scrolling through photos is the point. */
+  .big-project-view {
+    height: auto !important;
+    overflow-x: visible !important;
+  }
+  .big-project-view-boxes {
+    position: static !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 22px !important;
+    padding: 22px 0 0 !important;
+  }
+  /* every block full width; text keeps the page gutter, photos stay full-bleed */
+  .big-project-view-boxes > * {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    flex: 0 0 auto !important;
+    align-self: stretch !important;
+  }
+  .big-project-view-boxes > *:not(:has(img)) { padding-left: 20px !important; padding-right: 20px !important; }
+  .big-project-view-boxes img { width: 100% !important; height: auto !important; }
 }
