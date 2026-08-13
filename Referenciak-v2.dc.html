@@ -436,16 +436,21 @@ class Component extends DCLogic {
 
   _sizeContainer() {
     if (!this._enabled || !this._container) return;
-    const s = this._openMode ? 1 : REST;
-    this._container.style.height = Math.round(this._H * s + this._allow) + 'px';
+    /* With a viewport-pinned origin the block renders around the viewport, so the
+       container must reserve the UNSCALED height: at the bottom of the list the
+       rendered extent works out to _H - vh*(1-s)/s, i.e. essentially _H. Sizing
+       it to _H * REST instead is what pushed the last project ~1000px past the
+       container and into the CTA. big.dk does the same — its scaler container is
+       the full document height. */
+    this._container.style.height = Math.round(this._H) + 'px';
   }
 
   // Origin travels proportionally through the list, capped so the scaled block
   // always stays inside the container — viewport-pinned origin drifted a full
   // 25% of the list height out of the layout and left a hole above the CTA.
   _applyOrigin() {
-    const p = Math.max(0, Math.min((window.scrollY + innerHeight * 0.5 - this._scalerTop) / this._H, 1));
-    this._scaler.style.transformOrigin = '50% ' + (p * this._allow / (1 - REST)) + 'px';
+    const o = Math.max(0, Math.min(window.scrollY - this._scalerTop, this._H));
+    this._scaler.style.transformOrigin = '50% ' + o + 'px';
   }
 
   _tweenScale(to, durSec, ease) {
