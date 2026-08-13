@@ -1,6 +1,6 @@
 /* Epronex intro — curtain + logo flight. Static, framework-free, once per session. */
 (function () {
-  var MIN_HOLD = 1100, TRAVEL = 1600, CURTAIN_AT = 650, CURTAIN = 1100, FADE = 300;
+  var MIN_HOLD = 1100, TRAVEL = 1500, CURTAIN_AT = 650, CURTAIN = 1100, FADE = 300;
   var START_SCALE = 1.2;   /* must match the scale in the #epx-loader-logo rule below */
   var EASE_MOVE = 'cubic-bezier(.45,0,.55,1)', EASE_LIFT = 'cubic-bezier(.33,1,.68,1)';
 
@@ -136,13 +136,19 @@
         curtain.style.transform = 'translateY(-100%)';
       }, CURTAIN_AT);
 
+      /* Cross-fade only AFTER the flight has landed, never during it. Starting the
+         fade mid-flight blends a still-moving loader mark with the stationary header
+         mark, so the visible centroid slides between the two — measured off a screen
+         recording as an 8px snap in the final frame, after the motion had already
+         decelerated to ~2px/frame. big.dk does the same: its logo reaches its final
+         position first and only then begins to fade. */
       setTimeout(function () {
         logo.style.opacity = '0';        /* transition already declared above — do not touch it here */
         target.style.transition = 'opacity 500ms ease';
         target.style.opacity = '1';
-      }, TRAVEL - FADE);
+      }, TRAVEL);
 
-      setTimeout(done, Math.max(TRAVEL, CURTAIN_AT + CURTAIN) + 100);
+      setTimeout(done, Math.max(TRAVEL + FADE, CURTAIN_AT + CURTAIN) + 100);
     })();
   }
 
