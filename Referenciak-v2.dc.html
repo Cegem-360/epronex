@@ -526,6 +526,7 @@ class Component extends DCLogic {
     clearTimeout(el._openT1);
     clearTimeout(el._openT2);
     clearTimeout(el._openT3);
+    clearTimeout(el._openT4);
     clearTimeout(el._closeT1);
     clearTimeout(el._closeT2);
 
@@ -604,6 +605,12 @@ class Component extends DCLogic {
         clearTimeout(this._idle);
         if (this._tween) this._tween.stop();
         this._tween = this._tweenScale(1, 1.8, EASE_OUT);
+        /* Suppress the velocity zoom only while the open animation is running,
+           not for as long as the project stays open. Once the list has settled
+           at scale 1, scrolling resumes the normal zoom — big.dk behaves the
+           same way: scroll after opening and the list zooms out again. */
+        clearTimeout(el._openT4);
+        el._openT4 = setTimeout(() => { this._openMode = false; }, 1900);
       }
 
       setTimeout(() => {
