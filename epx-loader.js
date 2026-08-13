@@ -1,6 +1,7 @@
 /* Epronex intro — curtain + logo flight. Static, framework-free, once per session. */
 (function () {
-  var MIN_HOLD = 1100, TRAVEL = 1100, CURTAIN_AT = 450, CURTAIN = 800, FADE = 260;
+  var MIN_HOLD = 1100, TRAVEL = 1600, CURTAIN_AT = 650, CURTAIN = 1100, FADE = 300;
+  var START_SCALE = 1.2;   /* must match the scale in the #epx-loader-logo rule below */
   var EASE_MOVE = 'cubic-bezier(.45,0,.55,1)', EASE_LIFT = 'cubic-bezier(.33,1,.68,1)';
 
   /* How often the intro replays. Change this one constant to dial it back.
@@ -103,9 +104,23 @@
          source here: SVGSVGElement has no offsetHeight (it is not an HTMLElement, so the
          property is undefined), and getBoundingClientRect would include the scale(1.2)
          from the stylesheet. Either mistake yields a NaN or wrong k. */
-      var baseH = parseFloat(getComputedStyle(logo.querySelector('svg')).height);
-      var k = to.height / baseH;
-      if (!isFinite(k) || k <= 0) k = 1;   /* never emit scale(NaN): it voids the whole transform */
+      var svgEl = logo.querySelector('svg');
+      var baseH = parseFloat(getComputedStyle(svgEl).height);
+      if (!isFinite(baseH) || baseH <= 0 || !to.height) return requestAnimationFrame(wait);
+
+      /* Re-base the mark to the TARGET height so the flight ends at scale(1).
+         A transform-scaled SVG is rasterised at its layout size and then resampled,
+         while the header logo is an <img> drawn natively at its own size. Landing at
+         scale(0.69) meant the two never matched pixel-for-pixel and the cross-fade
+         showed it as a small jump. At scale(1) the loader renders natively at exactly
+         the header's size, so the handoff is invisible.
+         Rendered size is unchanged across the re-base (height x scale is constant) and
+         the centre does not move, so dx/dy stay valid and nothing is visible. */
+      var startScale = (baseH * START_SCALE) / to.height;
+      svgEl.style.height = to.height + 'px';
+      svgEl.style.width = to.width + 'px';   /* pin both axes: width:auto left a 0.3px gap */
+      logo.style.transform = 'translate(-50%,-50%) scale(' + startScale + ')';
+      void logo.getBoundingClientRect().width;   /* commit before transitioning */
 
       target.style.opacity = '0';
       /* Declare BOTH transitions up front and never reassign style.transition again.
@@ -114,7 +129,7 @@
          visibly teleports the last stretch into the header slot. */
       logo.style.transition = 'transform ' + TRAVEL + 'ms ' + EASE_MOVE +
                               ', opacity ' + FADE + 'ms linear';
-      logo.style.transform = 'translate(-50%,-50%) translate(' + dx + 'px,' + dy + 'px) scale(' + k + ')';
+      logo.style.transform = 'translate(-50%,-50%) translate(' + dx + 'px,' + dy + 'px) scale(1)';
 
       setTimeout(function () {
         curtain.style.transition = 'transform ' + CURTAIN + 'ms ' + EASE_LIFT;
