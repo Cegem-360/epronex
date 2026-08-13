@@ -45,11 +45,21 @@
     return el.scrollWidth > el.clientWidth + 4 ? el : null;
   }
 
-  function edge(x) {
+  /* A direction only counts if the strip can actually move that way — at either
+     end the zone goes neutral, so no arrow and no dead click. */
+  function edge(x, strip) {
     var w = Math.max(EDGE_MIN, innerWidth * EDGE_RATIO);
-    if (x < w) return -1;
-    if (x > innerWidth - w) return 1;
+    var max = strip.scrollWidth - strip.clientWidth;
+    if (x < w) return strip.scrollLeft > 1 ? -1 : 0;
+    if (x > innerWidth - w) return strip.scrollLeft < max - 1 ? 1 : 0;
     return 0;
+  }
+
+  var lastX = 0, lastY = 0;
+
+  function applyCursor(strip) {
+    var dir = edge(lastX, strip);
+    strip.style.cursor = dir === -1 ? CUR_LEFT : dir === 1 ? CUR_RIGHT : '';
   }
 
   var dragging = null;   /* {strip, startX, startScroll, moved} */
@@ -65,12 +75,21 @@
       }
       return;
     }
+    lastX = e.clientX; lastY = e.clientY;
     if (!active()) return;
     var strip = stripAt(e.target);
     if (!strip) return;
-    var dir = edge(e.clientX);
-    strip.style.cursor = dir === -1 ? CUR_LEFT : dir === 1 ? CUR_RIGHT : '';
+    applyCursor(strip);
   }, { passive: false });
+
+  /* Reaching an end by clicking or dragging must clear the arrow straight away,
+     without waiting for the next pointer move. Scroll does not bubble, so this
+     listens in the capture phase. */
+  document.addEventListener('scroll', function (e) {
+    var el = e.target;
+    if (!active() || !el || !el.classList || !el.classList.contains('big-project-view')) return;
+    if (el.scrollWidth > el.clientWidth + 4) applyCursor(el);
+  }, true);
 
   document.addEventListener('pointerdown', function (e) {
     if (!active() || e.button !== 0) return;
@@ -89,7 +108,7 @@
       setTimeout(function () { suppressClick = false; }, 0);
       return;
     }
-    var dir = edge(e.clientX);
+    var dir = edge(e.clientX, strip);
     if (!dir) return;                       /* plain click in the middle: leave it alone */
     suppressClick = true;
     setTimeout(function () { suppressClick = false; }, 0);
