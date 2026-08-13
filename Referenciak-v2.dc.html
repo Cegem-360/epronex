@@ -618,16 +618,36 @@ class Component extends DCLogic {
         view.style.justifyContent = 'flex-start';
         view.style.overflowX = 'scroll';
         if (!wide) return;
-        if (!el._spacer) {
-          const sp = document.createElement('div');
-          sp.setAttribute('data-lead-spacer', '');
-          sp.style.cssText = 'flex:0 0 auto;width:368px;height:1px';
-          view.insertBefore(sp, view.firstChild);
-          el._spacer = sp;
-        }
+        /* Lead spacer sized so the opened photo ends up CENTRED in the viewport,
+           which makes it grow symmetrically about the middle. A fixed 368px gutter
+           anchored it near its left edge instead: measured 70px of growth to the
+           left against 520px to the right, ending 17px past the right edge of the
+           screen. big.dk grows 239px each way with the centre pinned. */
+        /* Widen the row FIRST, then measure — the strip's left edge moves when the
+           item's negative margin is dropped, so a spacer computed beforehand is
+           in the wrong coordinate space and lands the photo off-centre. */
         el.style.paddingLeft = '0';
         el.style.marginLeft = '0';
         view.style.width = '100vw';
+        void view.offsetWidth;
+
+        if (!el._spacer) {
+          const ar = (img.naturalWidth && img.naturalHeight)
+            ? img.naturalWidth / img.naturalHeight
+            : (img.getBoundingClientRect().width / img.getBoundingClientRect().height) || 1.5;
+          const targetW = 0.76 * innerHeight * ar;
+          /* The strip settles at left:0, scrollLeft:0 and full viewport width, so the
+             photo's final left edge is simply spacer + the flex gap. Do NOT measure
+             the strip's live position here — the scaler is still zooming 0.752 -> 1,
+             so any viewport-space reading is taken in a frame that no longer applies. */
+          const gap = parseFloat(getComputedStyle(view).columnGap || getComputedStyle(view).gap) || 0;
+          const lead = Math.max(0, Math.round((innerWidth - targetW) / 2 - gap));
+          const sp = document.createElement('div');
+          sp.setAttribute('data-lead-spacer', '');
+          sp.style.cssText = 'flex:0 0 auto;width:' + lead + 'px;height:1px';
+          view.insertBefore(sp, view.firstChild);
+          el._spacer = sp;
+        }
         el._openT2 = setTimeout(() => { this._H = this._scaler.offsetHeight; this._sizeContainer(); }, 850);
 
         /* A CSS transition needs two DEFINITE endpoints. The row sits at its
