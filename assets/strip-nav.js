@@ -18,8 +18,11 @@
  * For the TALL rebuild: this is a small Alpine component on the strip element.
  */
 (function () {
-  var EDGE_RATIO = 0.16;      /* share of the viewport treated as an edge zone */
-  var EDGE_MIN = 90, EDGE_MAX = 220;
+  /* Each zone covers nearly half the viewport, leaving a narrow neutral band in
+     the middle. The old 16%/220px cap made the arrows a thin sliver most people
+     never found. */
+  var EDGE_RATIO = 0.45;      /* share of the viewport treated as an edge zone */
+  var EDGE_MIN = 90;
   var PAGE_RATIO = 0.8;       /* how far one click scrolls, as a share of width */
   var DRAG_THRESHOLD = 6;     /* px before a press becomes a drag, not a click  */
 
@@ -43,7 +46,7 @@
   }
 
   function edge(x) {
-    var w = Math.max(EDGE_MIN, Math.min(EDGE_MAX, innerWidth * EDGE_RATIO));
+    var w = Math.max(EDGE_MIN, innerWidth * EDGE_RATIO);
     if (x < w) return -1;
     if (x > innerWidth - w) return 1;
     return 0;
