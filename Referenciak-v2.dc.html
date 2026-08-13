@@ -626,6 +626,7 @@ class Component extends DCLogic {
         /* Widen the row FIRST, then measure — the strip's left edge moves when the
            item's negative margin is dropped, so a spacer computed beforehand is
            in the wrong coordinate space and lands the photo off-centre. */
+        const beforeLeft = img.getBoundingClientRect().left;
         el.style.paddingLeft = '0';
         el.style.marginLeft = '0';
         view.style.width = '100vw';
@@ -642,11 +643,26 @@ class Component extends DCLogic {
              so any viewport-space reading is taken in a frame that no longer applies. */
           const gap = parseFloat(getComputedStyle(view).columnGap || getComputedStyle(view).gap) || 0;
           const lead = Math.max(0, Math.round((innerWidth - targetW) / 2 - gap));
+
           const sp = document.createElement('div');
           sp.setAttribute('data-lead-spacer', '');
-          sp.style.cssText = 'flex:0 0 auto;width:' + lead + 'px;height:1px';
+          sp.style.cssText = 'flex:0 0 auto;width:0px;height:1px';
           view.insertBefore(sp, view.firstChild);
           el._spacer = sp;
+
+          /* Dropping the item's -368px margin and going width:100vw repositions the
+             photo instantly — measured as a 169px sideways jump in a single frame,
+             which was the largest change in the whole reveal and the reason it did
+             not read like big.dk. Start the spacer at whatever value keeps the photo
+             exactly where it was, then transition it to the centring value so the
+             slide happens over the same .78s as the growth. Measured in layout px,
+             hence dividing by the live scale. */
+          void view.offsetWidth;
+          const drift = (beforeLeft - img.getBoundingClientRect().left) / (this._scale || 1);
+          sp.style.width = Math.max(0, Math.round(drift)) + 'px';
+          void view.offsetWidth;
+          sp.style.transition = 'width .78s cubic-bezier(.45,0,.55,1)';
+          sp.style.width = lead + 'px';
         }
         el._openT2 = setTimeout(() => { this._H = this._scaler.offsetHeight; this._sizeContainer(); }, 850);
 
