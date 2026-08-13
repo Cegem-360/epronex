@@ -629,6 +629,17 @@ class Component extends DCLogic {
         el.style.marginLeft = '0';
         view.style.width = '100vw';
         el._openT2 = setTimeout(() => { this._H = this._scaler.offsetHeight; this._sizeContainer(); }, 850);
+
+        /* A CSS transition needs two DEFINITE endpoints. The row sits at its
+           natural (auto) height, so going straight to 76vh did not animate at
+           all — it snapped open in a single frame and the .78s easing never ran.
+           Pin the current height in px, flush it, then transition. big.dk does
+           exactly this: it writes an explicit px height before switching to
+           76vh. Same for the image's width, which goes to fit-content. */
+        view.style.height = view.offsetHeight + 'px';
+        img.style.width = img.offsetWidth + 'px';
+        void view.offsetHeight;                       /* commit the pinned values */
+
         view.style.height = '76vh';
         img.style.height = '100%';
         img.style.width = 'fit-content';
