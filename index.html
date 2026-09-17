@@ -231,6 +231,7 @@
         <button data-filter="retail" onClick="{{ filter }}" style="font-family:'Titillium Web';font-weight:700;font-size:13px;letter-spacing:.6px;padding:11px 22px;border:1px solid #d8dad3;border-radius:40px;background:transparent;color:#3a3d38;cursor:pointer;transition:all .2s">RETAIL</button>
         <button data-filter="ipari" onClick="{{ filter }}" style="font-family:'Titillium Web';font-weight:700;font-size:13px;letter-spacing:.6px;padding:11px 22px;border:1px solid #d8dad3;border-radius:40px;background:transparent;color:#3a3d38;cursor:pointer;transition:all .2s">IPARI</button>
         <button data-filter="egeszsegugy" onClick="{{ filter }}" style="font-family:'Titillium Web';font-weight:700;font-size:13px;letter-spacing:.6px;padding:11px 22px;border:1px solid #d8dad3;border-radius:40px;background:transparent;color:#3a3d38;cursor:pointer;transition:all .2s">EGÉSZSÉGÜGY</button>
+        <button data-filter="folyamatban" onClick="{{ filter }}" style="font-family:'Titillium Web';font-weight:700;font-size:13px;letter-spacing:.6px;padding:11px 22px;border:1px solid #d8dad3;border-radius:40px;background:transparent;color:#3a3d38;cursor:pointer;transition:all .2s">FOLYAMATBAN</button>
       </div>
 
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
@@ -252,6 +253,7 @@
         <div data-reveal data-cat="iroda" style="position:relative;height:260px;border-radius:9px;overflow:hidden;background:#000"><img src="assets/ref-hungaria.jpg" alt="Hungária Center" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s,opacity .4s" style-hover="transform:scale(1.06);opacity:.82"><div style="position:absolute;left:0;right:0;bottom:0;padding:44px 20px 18px;background:linear-gradient(transparent,rgba(15,17,14,.92));pointer-events:none"><span style="font-family:'Titillium Web';font-weight:700;font-size:10.5px;letter-spacing:1.2px;color:#8bc46f">IRODAHÁZ</span><div style="color:#fff;font-family:'Titillium Web';font-weight:700;font-size:19px;margin-top:4px">Hungária Center</div><div style="color:#c9ccc4;font-size:12.5px;margin-top:2px">Budapest</div></div></div>
         <div data-reveal data-cat="iroda" style="position:relative;height:260px;border-radius:9px;overflow:hidden;background:#000"><img src="assets/ref-otpcsucs.jpg" alt="OTP Csúcs közösségi tér" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s,opacity .4s" style-hover="transform:scale(1.06);opacity:.82"><div style="position:absolute;left:0;right:0;bottom:0;padding:44px 20px 18px;background:linear-gradient(transparent,rgba(15,17,14,.92));pointer-events:none"><span style="font-family:'Titillium Web';font-weight:700;font-size:10.5px;letter-spacing:1.2px;color:#8bc46f">KÖZÖSSÉGI TÉR</span><div style="color:#fff;font-family:'Titillium Web';font-weight:700;font-size:19px;margin-top:4px">OTP Csúcs</div><div style="color:#c9ccc4;font-size:12.5px;margin-top:2px">Budapest</div></div></div>
       </div>
+      <div id="ref-empty" style="display:none;color:#71766e;font-size:15.5px;padding:28px 0 4px;text-align:center"></div>
 
       <div data-reveal style="text-align:center;margin-top:48px">
         <a href="Referenciak.dc.html" style="display:inline-flex;align-items:center;gap:12px;background:#4c8c3a;color:#fff;font-family:'Titillium Web';font-weight:700;font-size:14px;letter-spacing:1px;padding:16px 34px;border-radius:5px;transition:background .25s" style-hover="background:#5aa843;color:#fff">ÖSSZES REFERENCIA MEGTEKINTÉSE
@@ -446,9 +448,24 @@ class Component extends DCLogic {
     };
   }
   setFilter(key) {
+    /* 'folyamatban' is a STATUS, not a project type: a card carries
+       data-inprogress="true" alongside its data-cat, so an in-progress office
+       job still shows under IRODA too. Mirrors Referenciak.dc.html. */
+    let shown = 0;
     document.querySelectorAll('[data-cat]').forEach(el => {
-      el.style.display = (key === 'all' || el.dataset.cat === key) ? '' : 'none';
+      const on = key === 'all' ? true
+        : key === 'folyamatban' ? el.dataset.inprogress === 'true'
+        : el.dataset.cat === key;
+      el.style.display = on ? '' : 'none';
+      if (on) shown++;
     });
+    const empty = document.getElementById('ref-empty');
+    if (empty) {
+      empty.textContent = key === 'folyamatban'
+        ? 'Folyamatban lévő projektjeinket hamarosan itt mutatjuk be.'
+        : 'Nincs projekt ebben a kategóriában.';
+      empty.style.display = shown ? 'none' : '';
+    }
     document.querySelectorAll('[data-filter]').forEach(b => {
       const on = b.dataset.filter === key;
       b.style.background = on ? '#3a6e2c' : 'transparent';
