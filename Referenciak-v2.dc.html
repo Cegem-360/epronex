@@ -273,7 +273,10 @@ class Component extends DCLogic {
       { id: 'iroda', label: 'IRODA' },
       { id: 'retail', label: 'RETAIL' },
       { id: 'ipari', label: 'IPARI' },
-      { id: 'egeszsegugy', label: 'EGÉSZSÉGÜGY' }
+      { id: 'egeszsegugy', label: 'EGÉSZSÉGÜGY' },
+      /* Status, not a project type — a project carries inProgress: true ALONGSIDE its
+         cat, so an in-progress office job still appears under IRODA as well. */
+      { id: 'folyamatban', label: 'FOLYAMATBAN' }
     ];
   }
 
@@ -337,7 +340,10 @@ class Component extends DCLogic {
       };
     });
 
-    const list = this.allProjects().filter(p => active === 'all' || p.cat === active);
+    const list = this.allProjects().filter(p =>
+      active === 'all' ? true :
+      active === 'folyamatban' ? !!p.inProgress :
+      p.cat === active);
     const projects = list.map((p, i) => ({
       id: p.id, title: p.title, catLabel: p.catLabel, meta: p.meta, img: p.img,
       badge: p.badge || '', href: p.href || '', ratio: p.ratio || '3 / 2',
@@ -348,7 +354,11 @@ class Component extends DCLogic {
     }));
 
     const n = list.length;
-    return { filters, projects, countLabel: n + ' projekt' + (active === 'all' ? '' : ' ebben a kategóriában') };
+    return { filters, projects, countLabel: n
+        ? n + ' projekt' + (active === 'all' ? '' : ' ebben a kategóriában')
+        : (active === 'folyamatban'
+            ? 'Folyamatban lévő projektjeinket hamarosan itt mutatjuk be.'
+            : 'Nincs projekt ebben a kategóriában.') };
   }
 
   componentDidMount() {
