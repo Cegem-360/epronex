@@ -29,13 +29,13 @@
   section[id]{scroll-margin-top:124px}
   @keyframes floatUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
   @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}100%{transform:translateY(16px);opacity:0}}
-  @keyframes heroZoom{from{transform:scale(1.14)}to{transform:scale(1)}}
+  @keyframes heroZoom{from{transform:scale3d(1.14,1.14,1)}to{transform:scale3d(1,1,1)}}
   /* Continuous slow drift, client request 2026-09-23. It picks up exactly where
      the 8s entry zoom lands (scale 1) and breathes between 1 and 1.09 on a 26s
      half-cycle, so the image is always moving but never visibly so. Both
      animations drive `transform`; the later one in the list wins once its delay
      has elapsed, which is why heroZoom needs no explicit hand-off. */
-  @keyframes heroDrift{from{transform:scale(1)}to{transform:scale(1.09)}}
+  @keyframes heroDrift{from{transform:scale3d(1,1,1)}to{transform:scale3d(1.06,1.06,1)}}
 
   /* mobile lockup: taller two-line variant, width follows aspect ratio */
   @media (max-width:767px){.epx-logo{height:52px!important;width:auto!important}}
@@ -70,7 +70,7 @@
   <!-- HERO -->
   <div style="position:relative;height:720px;overflow:hidden;background:#1b1d1a">
     <div ref="{{ heroRef }}" style="position:absolute;inset:-90px 0;will-change:transform">
-      <img class="epx-hero-img" src="assets/ref-richter.jpg" alt="Richter Gedeon Irodaépület" style="width:100%;height:100%;object-fit:cover;will-change:transform;animation:heroZoom 8s cubic-bezier(.16,.7,.2,1) both,heroDrift 26s 8s ease-in-out infinite alternate">
+      <img class="epx-hero-img" src="assets/ref-richter.jpg" alt="Richter Gedeon Irodaépület" style="width:100%;height:100%;object-fit:cover;will-change:transform;backface-visibility:hidden;animation:heroZoom 8s cubic-bezier(.16,.7,.2,1) both,heroDrift 30s 8s ease-in-out infinite alternate">
     </div>
     <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,17,14,.9) 0%,rgba(15,17,14,.62) 46%,rgba(15,17,14,.24) 100%);pointer-events:none"></div>
     <div style="position:absolute;inset:0;pointer-events:none">
@@ -522,20 +522,31 @@ class Component extends DCLogic {
       document.querySelectorAll('[data-reveal]').forEach(el => { if (getComputedStyle(el).opacity === '0') { el.style.opacity='1'; el.style.transform='none'; } });
       document.querySelectorAll('[data-count]').forEach(c => { if (!c._done) { c._done = true; this.countUp(c); } });
     }, 1800);
-    this._onScroll = () => {
+    /* A scroll listener can fire several times between two frames, and this one
+       both reads layout (getBoundingClientRect) and writes transforms — so the
+       old version forced a synchronous layout per event and repainted work the
+       screen never showed. Coalescing to one write per frame is what makes the
+       hero parallax ride smoothly under the zoom. translate3d keeps both layers
+       on the compositor. */
+    this._parallax = () => {
+      this._raf = 0;
       const y = window.scrollY || window.pageYOffset || 0;
-      if (this._hero) this._hero.style.transform = 'translateY(' + (y * 0.18) + 'px)';
+      if (this._hero) this._hero.style.transform = 'translate3d(0,' + (y * 0.18) + 'px,0)';
       if (this._karrier && this._karrier.parentElement) {
         const r = this._karrier.parentElement.getBoundingClientRect();
         const prog = (window.innerHeight - r.top) / (window.innerHeight + r.height);
-        this._karrier.style.transform = 'translateY(' + ((prog - 0.5) * 80) + 'px)';
+        this._karrier.style.transform = 'translate3d(0,' + ((prog - 0.5) * 80) + 'px,0)';
       }
+    };
+    this._onScroll = () => {
+      if (!this._raf) this._raf = requestAnimationFrame(this._parallax);
     };
     window.addEventListener('scroll', this._onScroll, { passive: true });
     this._onScroll();
   }
   componentWillUnmount() {
     if (this._io) this._io.disconnect();
+    if (this._raf) cancelAnimationFrame(this._raf);
     if (this._onScroll) window.removeEventListener('scroll', this._onScroll);
   }
 }

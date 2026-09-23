@@ -224,6 +224,17 @@
   .epx-hero-img { animation: none !important; transform: none !important; }
 }
 
+/* ---------- 8b. hero ----------------------------------------------------- */
+/* The phone hero is a third of the desktop width but loads the same 1280px
+   square source, so `cover` is already stretching it before the drift adds
+   another 6%. Dropping heroDrift from the list leaves the entry zoom running
+   and the frame at rest after it — the shimmer on the facade grid is not worth
+   the motion on a screen this size. Naming one animation also truncates the
+   duration list to its first value, so no other property needs resetting. */
+@media (max-width: 767px) {
+  .epx-hero-img { animation-name: heroZoom !important; }
+}
+
 /* ---------- 9. page-specific: Referencia-BENU ---------------------------- */
 
 /* These cards carry 96px of horizontal padding, which cannot shrink inside a
