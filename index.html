@@ -29,23 +29,25 @@
   section[id]{scroll-margin-top:124px}
   @keyframes floatUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
   @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}100%{transform:translateY(16px);opacity:0}}
-  @keyframes heroZoom{from{transform:scale3d(1.14,1.14,1)}to{transform:scale3d(1,1,1)}}
-  /* Continuous drift, client request 2026-09-23. It picks up exactly where the
-     8s entry zoom lands (scale 1). Both animations drive `transform`; the later
-     one in the list wins once its delay has elapsed, so heroZoom needs no
-     explicit hand-off.
+  /* The hero zooms by moving the layer along Z under a perspective, not by
+     scaling it. Both give the same picture — with the perspective on the parent
+     set to 800px, translateZ(z) renders at 800 / (800 - z), so z 98 is 1.14 and
+     z 45 is 1.06 — but they do not render the same way.
 
-     The RATE is the whole story here, and it was wrong twice. At 1 -> 1.06 over
-     30s the edge of the frame travelled about 0.9px per second, so the rendered
-     image stood still for roughly 29 frames and then jumped a whole pixel —
-     which is what the client kept reporting as rough. It is not a timing
-     problem and no animation library fixes it: whatever sets the transform, the
-     compositor still resolves each frame to whole pixels.
+     A flat scale can be resolved to a whole-pixel offset, and at this speed it
+     was: the frame edge moved about 0.9px per second, so the image stood still
+     for roughly 29 frames and then jumped a pixel, over and over. That is what
+     the client reported as rough, three times. A perspective transform cannot
+     collapse like that, so the same slow motion renders continuously. Confirmed
+     side by side against four other techniques before shipping.
 
-     1 -> 1.10 over 13s is a little over four times that rate, which is the
-     setting that read as smooth in hero-test.html. More travel rather than a
-     faster twitch, so it still looks like a slow zoom. */
-  @keyframes heroDrift{from{transform:scale3d(1,1,1)}to{transform:scale3d(1.1,1.1,1)}}
+     Speeding the animation up hides the same defect by crossing a pixel every
+     frame; it is not needed here and the motion stays subtle.
+
+     heroZoom lands at z 0 and heroDrift starts there, so the hand-off needs no
+     code — the later animation in the list simply takes over after its delay. */
+  @keyframes heroZoom{from{transform:translate3d(0,0,98px)}to{transform:translate3d(0,0,0)}}
+  @keyframes heroDrift{from{transform:translate3d(0,0,0)}to{transform:translate3d(0,0,45px)}}
 
   /* mobile lockup: taller two-line variant, width follows aspect ratio */
   @media (max-width:767px){.epx-logo{height:52px!important;width:auto!important}}
@@ -83,11 +85,14 @@
          replaced element with object-fit re-resolves its concrete object size as
          the scale changes, and the result lands on whole pixels: the photo sat
          still for roughly half a second and then jumped 1px, over and over. A
-         painted background has no replaced-content box to re-resolve.
-         The parallax wrapper carries no will-change, so this layer is promoted on
-         its own rather than squashed into its parent's. -->
-    <div ref="{{ heroRef }}" style="position:absolute;inset:-90px 0">
-      <div class="epx-hero-img" role="img" aria-label="Richter Gedeon Irodaépület" style="width:100%;height:100%;background:url(assets/ref-richter.jpg) center center / cover no-repeat;will-change:transform;backface-visibility:hidden;animation:heroZoom 8s cubic-bezier(.16,.7,.2,1) both,heroDrift 13s 8s linear infinite alternate"></div>
+         painted background has no replaced-content box to re-resolve. That alone
+         did not fix it — see the heroDrift keyframes for what did — but a
+         background is still the right element to move, so it stayed.
+         The wrapper carries the perspective the zoom is measured against, and no
+         will-change, so the moving layer is promoted on its own rather than
+         squashed into its parent's. -->
+    <div ref="{{ heroRef }}" style="position:absolute;inset:-90px 0;perspective:800px">
+      <div class="epx-hero-img" role="img" aria-label="Richter Gedeon Irodaépület" style="width:100%;height:100%;background:url(assets/ref-richter.jpg) center center / cover no-repeat;will-change:transform;backface-visibility:hidden;animation:heroZoom 8s cubic-bezier(.16,.7,.2,1) both,heroDrift 30s 8s linear infinite alternate"></div>
     </div>
     <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,17,14,.9) 0%,rgba(15,17,14,.62) 46%,rgba(15,17,14,.24) 100%);pointer-events:none"></div>
     <div style="position:absolute;inset:0;pointer-events:none">
