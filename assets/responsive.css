@@ -219,6 +219,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   .epx-nav-panel, .epx-nav-scrim, .epx-burger span { transition: none !important; }
+  /* The hero drifts forever, which is exactly what this preference exists to
+     stop. Kill both the entry zoom and the loop and show the frame at rest. */
+  .epx-hero-img { animation: none !important; transform: none !important; }
 }
 
 /* ---------- 9. page-specific: Referencia-BENU ---------------------------- */
@@ -304,4 +307,12 @@
   }
   .big-project-view-boxes > *:not(:has(img)) { padding-left: 20px !important; padding-right: 20px !important; }
   .big-project-view-boxes img { width: 100% !important; height: auto !important; }
+}
+
+/* ---------- 11. team grid ----------------------------------------------- */
+/* Eight small avatar cards. The generic repeat(4, 1fr) rule above would drop
+   them to a single column below md, which makes the section absurdly tall for
+   what are 200px portraits — keep two up all the way down. */
+@media (max-width: 767px) {
+  .epx-team { grid-template-columns: repeat(2, 1fr) !important; gap: 16px !important; }
 }

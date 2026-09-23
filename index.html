@@ -30,6 +30,12 @@
   @keyframes floatUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
   @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}100%{transform:translateY(16px);opacity:0}}
   @keyframes heroZoom{from{transform:scale(1.14)}to{transform:scale(1)}}
+  /* Continuous slow drift, client request 2026-09-23. It picks up exactly where
+     the 8s entry zoom lands (scale 1) and breathes between 1 and 1.09 on a 26s
+     half-cycle, so the image is always moving but never visibly so. Both
+     animations drive `transform`; the later one in the list wins once its delay
+     has elapsed, which is why heroZoom needs no explicit hand-off. */
+  @keyframes heroDrift{from{transform:scale(1)}to{transform:scale(1.09)}}
 
   /* mobile lockup: taller two-line variant, width follows aspect ratio */
   @media (max-width:767px){.epx-logo{height:52px!important;width:auto!important}}
@@ -64,7 +70,7 @@
   <!-- HERO -->
   <div style="position:relative;height:720px;overflow:hidden;background:#1b1d1a">
     <div ref="{{ heroRef }}" style="position:absolute;inset:-90px 0;will-change:transform">
-      <img src="assets/ref-richter.jpg" alt="Richter Gedeon Irodaépület" style="width:100%;height:100%;object-fit:cover;animation:heroZoom 8s cubic-bezier(.16,.7,.2,1) both">
+      <img class="epx-hero-img" src="assets/ref-richter.jpg" alt="Richter Gedeon Irodaépület" style="width:100%;height:100%;object-fit:cover;will-change:transform;animation:heroZoom 8s cubic-bezier(.16,.7,.2,1) both,heroDrift 26s 8s ease-in-out infinite alternate">
     </div>
     <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,17,14,.9) 0%,rgba(15,17,14,.62) 46%,rgba(15,17,14,.24) 100%);pointer-events:none"></div>
     <div style="position:absolute;inset:0;pointer-events:none">
@@ -282,7 +288,7 @@
       <div data-reveal style="text-align:center">
         <div style="border-radius:10px;overflow:hidden;aspect-ratio:1/1"><img src="assets/varga-gyorgy.jpg" alt="Varga György" style="width:100%;height:100%;object-fit:cover"></div>
         <div style="font-family:'Titillium Web';font-weight:600;font-size:20px;margin-top:18px;letter-spacing:.5px">VARGA GYÖRGY</div>
-        <div style="color:#71766e;font-size:14px;margin-top:2px">Ügyvezető</div>
+        <div style="color:#71766e;font-size:14px;margin-top:2px">Vezérigazgató</div>
       </div>
       <div data-reveal style="text-align:center">
         <div style="border-radius:10px;overflow:hidden;aspect-ratio:1/1"><img src="assets/szabo-adam.jpg" alt="Szabó Ádám" style="width:100%;height:100%;object-fit:cover"></div>
@@ -291,16 +297,24 @@
       </div>
     </div>
 
-    <!-- team composition, per the 2026-09-17 client brief -->
+    <!-- A CSAPAT — the client asked (2026-09-23) for the bmpzrt.com/rolunk-csapatunk
+         pattern here: a photo, a name and a position per person, instead of the
+         headcount tiles this section used to carry. Ten people in total; the two
+         above are the same grid, one row up.
+
+         Names and photos are still to come, so the slots are deliberately visible
+         placeholders — drop a headshot into assets/team/ and replace [NÉV]. -->
     <div data-reveal style="margin-top:64px;padding-top:44px;border-top:1px solid #e7e8e3">
       <div style="text-align:center;font-family:'Titillium Web';font-weight:700;font-size:12px;letter-spacing:2px;color:#4c8c3a;margin-bottom:26px">A CSAPAT</div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:900px;margin:0 auto">
-        <div style="text-align:center;padding:20px 14px;background:#f7f8f5;border-radius:9px"><div style="font-family:'Titillium Web';font-weight:700;font-size:28px;color:#1b1d1a;line-height:1">1</div><div style="color:#71766e;font-size:14px;margin-top:6px">vezérigazgató</div></div>
-        <div style="text-align:center;padding:20px 14px;background:#f7f8f5;border-radius:9px"><div style="font-family:'Titillium Web';font-weight:700;font-size:28px;color:#1b1d1a;line-height:1">1</div><div style="color:#71766e;font-size:14px;margin-top:6px">értékesítési vezető</div></div>
-        <div style="text-align:center;padding:20px 14px;background:#f7f8f5;border-radius:9px"><div style="font-family:'Titillium Web';font-weight:700;font-size:28px;color:#1b1d1a;line-height:1">1</div><div style="color:#71766e;font-size:14px;margin-top:6px">vállalkozás vezető</div></div>
-        <div style="text-align:center;padding:20px 14px;background:#f7f8f5;border-radius:9px"><div style="font-family:'Titillium Web';font-weight:700;font-size:28px;color:#1b1d1a;line-height:1">1</div><div style="color:#71766e;font-size:14px;margin-top:6px">kivitelezés vezető</div></div>
-        <div style="text-align:center;padding:20px 14px;background:#f7f8f5;border-radius:9px"><div style="font-family:'Titillium Web';font-weight:700;font-size:28px;color:#1b1d1a;line-height:1">6</div><div style="color:#71766e;font-size:14px;margin-top:6px">projektvezető</div></div>
-        <div style="text-align:center;padding:20px 14px;background:#f7f8f5;border-radius:9px"><div style="font-family:'Titillium Web';font-weight:700;font-size:28px;color:#1b1d1a;line-height:1">1</div><div style="color:#71766e;font-size:14px;margin-top:6px">irodavezető</div></div>
+      <div class="epx-team" style="display:grid;grid-template-columns:repeat(4,1fr);gap:22px;max-width:900px;margin:0 auto">
+        <div data-reveal style="text-align:center"><div style="aspect-ratio:1/1;border-radius:10px;background:#eef0ea;border:1px solid #e7e8e3;display:flex;align-items:center;justify-content:center"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8" r="3.4" stroke="#b6bfae" stroke-width="1.6"/><path d="M4.8 20c.6-3.6 3.6-5.6 7.2-5.6s6.6 2 7.2 5.6" stroke="#b6bfae" stroke-width="1.6" stroke-linecap="round"/></svg></div><div style="font-family:'Titillium Web';font-weight:600;font-size:15px;margin-top:14px;letter-spacing:.4px;color:#9aa093">[NÉV]</div><div style="color:#71766e;font-size:13.5px;margin-top:2px">Vállalkozás vezető</div></div>
+        <div data-reveal style="text-align:center"><div style="aspect-ratio:1/1;border-radius:10px;background:#eef0ea;border:1px solid #e7e8e3;display:flex;align-items:center;justify-content:center"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8" r="3.4" stroke="#b6bfae" stroke-width="1.6"/><path d="M4.8 20c.6-3.6 3.6-5.6 7.2-5.6s6.6 2 7.2 5.6" stroke="#b6bfae" stroke-width="1.6" stroke-linecap="round"/></svg></div><div style="font-family:'Titillium Web';font-weight:600;font-size:15px;margin-top:14px;letter-spacing:.4px;color:#9aa093">[NÉV]</div><div style="color:#71766e;font-size:13.5px;margin-top:2px">Kivitelezés vezető</div></div>
+        <div data-reveal style="text-align:center"><div style="aspect-ratio:1/1;border-radius:10px;background:#eef0ea;border:1px solid #e7e8e3;display:flex;align-items:center;justify-content:center"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8" r="3.4" stroke="#b6bfae" stroke-width="1.6"/><path d="M4.8 20c.6-3.6 3.6-5.6 7.2-5.6s6.6 2 7.2 5.6" stroke="#b6bfae" stroke-width="1.6" stroke-linecap="round"/></svg></div><div style="font-family:'Titillium Web';font-weight:600;font-size:15px;margin-top:14px;letter-spacing:.4px;color:#9aa093">[NÉV]</div><div style="color:#71766e;font-size:13.5px;margin-top:2px">Projektvezető</div></div>
+        <div data-reveal style="text-align:center"><div style="aspect-ratio:1/1;border-radius:10px;background:#eef0ea;border:1px solid #e7e8e3;display:flex;align-items:center;justify-content:center"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8" r="3.4" stroke="#b6bfae" stroke-width="1.6"/><path d="M4.8 20c.6-3.6 3.6-5.6 7.2-5.6s6.6 2 7.2 5.6" stroke="#b6bfae" stroke-width="1.6" stroke-linecap="round"/></svg></div><div style="font-family:'Titillium Web';font-weight:600;font-size:15px;margin-top:14px;letter-spacing:.4px;color:#9aa093">[NÉV]</div><div style="color:#71766e;font-size:13.5px;margin-top:2px">Projektvezető</div></div>
+        <div data-reveal style="text-align:center"><div style="aspect-ratio:1/1;border-radius:10px;background:#eef0ea;border:1px solid #e7e8e3;display:flex;align-items:center;justify-content:center"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8" r="3.4" stroke="#b6bfae" stroke-width="1.6"/><path d="M4.8 20c.6-3.6 3.6-5.6 7.2-5.6s6.6 2 7.2 5.6" stroke="#b6bfae" stroke-width="1.6" stroke-linecap="round"/></svg></div><div style="font-family:'Titillium Web';font-weight:600;font-size:15px;margin-top:14px;letter-spacing:.4px;color:#9aa093">[NÉV]</div><div style="color:#71766e;font-size:13.5px;margin-top:2px">Projektvezető</div></div>
+        <div data-reveal style="text-align:center"><div style="aspect-ratio:1/1;border-radius:10px;background:#eef0ea;border:1px solid #e7e8e3;display:flex;align-items:center;justify-content:center"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8" r="3.4" stroke="#b6bfae" stroke-width="1.6"/><path d="M4.8 20c.6-3.6 3.6-5.6 7.2-5.6s6.6 2 7.2 5.6" stroke="#b6bfae" stroke-width="1.6" stroke-linecap="round"/></svg></div><div style="font-family:'Titillium Web';font-weight:600;font-size:15px;margin-top:14px;letter-spacing:.4px;color:#9aa093">[NÉV]</div><div style="color:#71766e;font-size:13.5px;margin-top:2px">Projektvezető</div></div>
+        <div data-reveal style="text-align:center"><div style="aspect-ratio:1/1;border-radius:10px;background:#eef0ea;border:1px solid #e7e8e3;display:flex;align-items:center;justify-content:center"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8" r="3.4" stroke="#b6bfae" stroke-width="1.6"/><path d="M4.8 20c.6-3.6 3.6-5.6 7.2-5.6s6.6 2 7.2 5.6" stroke="#b6bfae" stroke-width="1.6" stroke-linecap="round"/></svg></div><div style="font-family:'Titillium Web';font-weight:600;font-size:15px;margin-top:14px;letter-spacing:.4px;color:#9aa093">[NÉV]</div><div style="color:#71766e;font-size:13.5px;margin-top:2px">Projektvezető</div></div>
+        <div data-reveal style="text-align:center"><div style="aspect-ratio:1/1;border-radius:10px;background:#eef0ea;border:1px solid #e7e8e3;display:flex;align-items:center;justify-content:center"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8" r="3.4" stroke="#b6bfae" stroke-width="1.6"/><path d="M4.8 20c.6-3.6 3.6-5.6 7.2-5.6s6.6 2 7.2 5.6" stroke="#b6bfae" stroke-width="1.6" stroke-linecap="round"/></svg></div><div style="font-family:'Titillium Web';font-weight:600;font-size:15px;margin-top:14px;letter-spacing:.4px;color:#9aa093">[NÉV]</div><div style="color:#71766e;font-size:13.5px;margin-top:2px">Irodavezető</div></div>
       </div>
     </div>
   </section>
@@ -340,14 +354,13 @@
           </div>
         </div>
         <form data-reveal onSubmit="{{ onSubmit }}" style="background:#fff;border:1px solid #e7e8e3;border-radius:10px;padding:36px;display:grid;grid-template-columns:1fr 1fr;gap:24px">
-          <!-- Named contact — client to supply name / position / direct line.
-               Placeholders are deliberately visible so the gap is obvious on review. -->
+          <!-- Named contact, supplied by the client 2026-09-23. -->
           <div style="grid-column:1 / -1;display:flex;gap:14px;align-items:center;padding:16px 18px;background:#f7f8f5;border:1px solid #e7e8e3;border-radius:9px">
             <span style="width:42px;height:42px;border-radius:9px;background:#eaf1e4;display:flex;align-items:center;justify-content:center;flex:none"><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.4" stroke="#4c8c3a" stroke-width="1.6"/><path d="M5 20c0-3.3 3.1-5.4 7-5.4s7 2.1 7 5.4" stroke="#4c8c3a" stroke-width="1.6" stroke-linecap="round"/></svg></span>
             <div style="min-width:0">
               <div style="font-family:'Titillium Web';font-weight:700;font-size:11px;letter-spacing:1.6px;color:#4c8c3a">KAPCSOLATTARTÓJA</div>
-              <div style="font-family:'Titillium Web';font-weight:700;font-size:15.5px;color:#9aa093;margin-top:3px">[NÉV] · [POZÍCIÓ]</div>
-              <div style="color:#9aa093;font-size:14.5px;margin-top:1px">[KÖZVETLEN TELEFONSZÁM]</div>
+              <div style="font-family:'Titillium Web';font-weight:700;font-size:15.5px;color:#1b1d1a;margin-top:3px">Szabó Ádám · Értékesítési vezető</div>
+              <a href="tel:+36305089056" style="color:#3a6e2c;font-size:14.5px;margin-top:1px;display:inline-block" style-hover="color:#4c8c3a">+36 30 508 9056</a>
             </div>
           </div>
           <label style="grid-column:1 / -1;display:flex;flex-direction:column;gap:10px;font-family:'Titillium Web';font-weight:400;font-size:16px;text-transform:none;letter-spacing:0;color:#6b6f68"><span>Teljes név <span style="color:#e2574c">*</span></span>
