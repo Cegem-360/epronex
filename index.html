@@ -32,7 +32,7 @@
   /* The hero zooms by moving the layer along Z under a perspective, not by
      scaling it. Both give the same picture — with the perspective on the parent
      set to 800px, translateZ(z) renders at 800 / (800 - z), so z 98 is 1.14 and
-     z 45 is 1.06 — but they do not render the same way.
+     z 86 is 1.12 — but they do not render the same way.
 
      A flat scale can be resolved to a whole-pixel offset, and at this speed it
      was: the frame edge moved about 0.9px per second, so the image stood still
@@ -47,7 +47,7 @@
      heroZoom lands at z 0 and heroDrift starts there, so the hand-off needs no
      code — the later animation in the list simply takes over after its delay. */
   @keyframes heroZoom{from{transform:translate3d(0,0,98px)}to{transform:translate3d(0,0,0)}}
-  @keyframes heroDrift{from{transform:translate3d(0,0,0)}to{transform:translate3d(0,0,45px)}}
+  @keyframes heroDrift{from{transform:translate3d(0,0,0)}to{transform:translate3d(0,0,86px)}}
 
   /* mobile lockup: taller two-line variant, width follows aspect ratio */
   @media (max-width:767px){.epx-logo{height:52px!important;width:auto!important}}
