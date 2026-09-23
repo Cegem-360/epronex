@@ -23,6 +23,16 @@
      interpolate most reliably
   D  the same scale as A but four times faster — the control. It has to look
      smooth; if it does not, the capture path is quantising, not the browser.
+
+  Round 2, after the client picked D as the least jarring — which rules out
+  promotion (B) and pan (C) and leaves rate as the cause:
+
+  E  the ORIGINAL slow rate, but zoomed by moving the layer along Z under a
+     perspective instead of scaling it. A perspective transform cannot be
+     resolved to a whole-pixel offset the way a flat one can, so if the stepping
+     is pixel snapping this strip escapes it while staying subtle.
+  F  the setting about to ship: more travel at roughly D's rate, so it still
+     reads as a slow zoom rather than a fast twitch.
 -->
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
@@ -34,6 +44,9 @@
 
   @keyframes tScale{from{transform:scale3d(1,1,1)}to{transform:scale3d(1.06,1.06,1)}}
   @keyframes tPan  {from{transform:translate3d(0,0,0)}to{transform:translate3d(-6%,0,0)}}
+  /* z of 45px under an 800px perspective works out to the same 1.06 as tScale */
+  @keyframes tZ    {from{transform:translate3d(0,0,0)}to{transform:translate3d(0,0,45px)}}
+  @keyframes tShip {from{transform:scale3d(1,1,1)}to{transform:scale3d(1.1,1.1,1)}}
 
   /* A — as shipped */
   .a{will-change:transform;backface-visibility:hidden;animation:tScale 30s linear infinite alternate}
@@ -43,6 +56,11 @@
   .c{width:112%;will-change:transform;animation:tPan 30s linear infinite alternate}
   /* D — control, 4x the speed of A */
   .d{will-change:transform;backface-visibility:hidden;animation:tScale 7.5s linear infinite alternate}
+  /* E — the perspective lives on the strip, the motion on the frame */
+  .strip.persp{perspective:800px}
+  .e{will-change:transform;backface-visibility:hidden;animation:tZ 30s linear infinite alternate}
+  /* F — what index.html is about to ship */
+  .f{will-change:transform;backface-visibility:hidden;animation:tShip 13s linear infinite alternate}
 </style>
 </head>
 <body>
@@ -50,5 +68,7 @@
   <div class="strip"><span class="tag">B · SCALE, PROMÓCIÓ NÉLKÜL</span><div class="frame b"></div></div>
   <div class="strip"><span class="tag">C · PAN (oldalirányú mozgás)</span><div class="frame c"></div></div>
   <div class="strip"><span class="tag">D · SCALE 4× GYORSABBAN (kontroll)</span><div class="frame d"></div></div>
+  <div class="strip persp"><span class="tag">E · LASSÚ, DE TÉRBELI (perspective)</span><div class="frame e"></div></div>
+  <div class="strip"><span class="tag">F · EZ MEGY KI ÉLESBE</span><div class="frame f"></div></div>
 </body>
 </html>
