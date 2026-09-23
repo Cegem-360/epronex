@@ -69,8 +69,15 @@
 
   <!-- HERO -->
   <div style="position:relative;height:720px;overflow:hidden;background:#1b1d1a">
-    <div ref="{{ heroRef }}" style="position:absolute;inset:-90px 0;will-change:transform">
-      <img class="epx-hero-img" src="assets/ref-richter.jpg" alt="Richter Gedeon Irodaépület" style="width:100%;height:100%;object-fit:cover;will-change:transform;backface-visibility:hidden;animation:heroZoom 8s cubic-bezier(.16,.7,.2,1) both,heroDrift 30s 8s ease-in-out infinite alternate">
+    <!-- The drifting frame is a background-image div, not an <img>. Animating a
+         replaced element with object-fit re-resolves its concrete object size as
+         the scale changes, and the result lands on whole pixels: the photo sat
+         still for roughly half a second and then jumped 1px, over and over. A
+         painted background has no replaced-content box to re-resolve.
+         The parallax wrapper carries no will-change, so this layer is promoted on
+         its own rather than squashed into its parent's. -->
+    <div ref="{{ heroRef }}" style="position:absolute;inset:-90px 0">
+      <div class="epx-hero-img" role="img" aria-label="Richter Gedeon Irodaépület" style="width:100%;height:100%;background:url(assets/ref-richter.jpg) center center / cover no-repeat;will-change:transform;backface-visibility:hidden;animation:heroZoom 8s cubic-bezier(.16,.7,.2,1) both,heroDrift 30s 8s linear infinite alternate"></div>
     </div>
     <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,17,14,.9) 0%,rgba(15,17,14,.62) 46%,rgba(15,17,14,.24) 100%);pointer-events:none"></div>
     <div style="position:absolute;inset:0;pointer-events:none">
