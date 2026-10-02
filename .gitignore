@@ -1,3 +1,7 @@
 .thumbnail
 uploads/*.md
 .DS_Store
+
+# Client deliverables: briefs, source photos, extracted text. Local only —
+# large, and the .docx briefs must never reach the client-reviewed staging site.
+__client/
